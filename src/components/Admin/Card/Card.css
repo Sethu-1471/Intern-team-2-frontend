@@ -1,0 +1,16 @@
+.card-container {
+    box-shadow: 0 0 10px #000;
+    border-radius: 1rem;
+    margin: 0.5rem;
+}
+
+.round-icon {
+    width: 4rem;
+    height: 4rem;
+    background-color: rgb(209, 0, 63);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    border-radius: 100%;
+}

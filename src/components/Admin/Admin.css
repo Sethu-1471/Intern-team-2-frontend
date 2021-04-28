@@ -1,0 +1,5 @@
+.statistics-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 18rem));
+    grid-gap: 2rem;
+}
