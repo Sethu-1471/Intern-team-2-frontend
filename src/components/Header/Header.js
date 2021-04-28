@@ -133,7 +133,7 @@ export default function Header() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             LOGO
@@ -193,6 +193,7 @@ export default function Header() {
       </AppBar>
       {renderMobileMenu}
       {/* {renderMenu} */}
+      <div className="" style={{height:64}}></div>
     </div>
   );
 }
