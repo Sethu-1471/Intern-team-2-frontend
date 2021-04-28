@@ -8,11 +8,11 @@ function App() {
     return (
         <>
             <Switch>
-                <Route path="/courses">
-                    <Courses />
-                </Route>
-                <Route path="/">
+                <Route path="/" exact>
                     <Home />
+                </Route>
+                <Route path="/courses" exact>
+                    <Courses />
                 </Route>
                 <Route path="/admin" exact component={AdminPage} />
             </Switch>
