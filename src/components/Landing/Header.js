@@ -1,20 +1,20 @@
 import Logo from './Images/logo.png'
 const Header = () => {
     return (
-        <header id="header" class="transparent-nav">
-            <div class="container">
-                <div class="navbar-header">
-                    <div class="navbar-brand">
-                        <a class="logo" href="index.html">
+        <header id="header" className="transparent-nav">
+            <div className="container">
+                <div className="navbar-header">
+                    <div className="navbar-brand">
+                        <a className="logo" href="index.html">
                             <img src={Logo} alt="logo"></img>
                         </a>
                     </div>
-                    <button class="navbar-toggle">
+                    <button className="navbar-toggle">
                         <span></span>
                     </button>
                 </div>
                 <nav id="nav">
-                    <ul class="main-menu nav navbar-nav navbar-right">
+                    <ul className="main-menu nav navbar-nav navbar-right">
                         <li><a href="#">Login/Register</a></li>
                     </ul>
                 </nav>

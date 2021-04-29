@@ -1,19 +1,19 @@
 import Logo from './Images/logo.png'
 const Footer = () => {
     return (
-        <footer id="footer" class="section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="footer-logo">
-							<a class="logo" href="index.html">
-								<img src={Logo} alt="logo"></img>
+        <footer id="footer" className="section">
+			<div className="container">
+				<div className="row">
+					<div className="col-md-6">
+						<div className="footer-logo">
+							<a className="logo" href="#">
+								<h1>Co-Curricular Tutor</h1>
 							</a>
 						</div>
 					</div>
-					<div class="col-md-6">
-						<ul class="footer-nav">
-							<li><a href="index.html">Home</a></li>
+					<div className="col-md-6">
+						<ul className="footer-nav">
+							<li><a href="#">Home</a></li>
 							<li><a href="#">About</a></li>
 							<li><a href="#">Courses</a></li>
 							<li><a href="#">Blog</a></li>
@@ -21,15 +21,15 @@ const Footer = () => {
 						</ul>
 					</div>
 				</div>
-				<div id="bottom-footer" class="row">
-					<div class="col-md-4 col-md-push-8">
-						<ul class="footer-social">
-							<li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
-							<li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-							<li><a href="#" class="youtube"><i class="fa fa-youtube"></i></a></li>
-							<li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+				<div id="bottom-footer" className="row">
+					<div className="col-md-4 col-md-push-8">
+						<ul className="footer-social">
+							<li><a href="#" className="facebook"><i className="fa fa-facebook"></i></a></li>
+							<li><a href="#" className="twitter"><i className="fa fa-twitter"></i></a></li>
+							<li><a href="#" className="google-plus"><i className="fa fa-google-plus"></i></a></li>
+							<li><a href="#" className="instagram"><i className="fa fa-instagram"></i></a></li>
+							<li><a href="#" className="youtube"><i className="fa fa-youtube"></i></a></li>
+							<li><a href="#" className="linkedin"><i className="fa fa-linkedin"></i></a></li>
 						</ul>
 					</div>
 				</div>
