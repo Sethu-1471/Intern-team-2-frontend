@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Coursedetail() {
     return (
-        <div className="d-flex">
+        <div className="d-block d-md-flex">
             <div>
                 <video controls className="border_right">
                 <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4"/>
