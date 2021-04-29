@@ -12,10 +12,50 @@
       font-size: 3.5rem;
     }
   }
- body{
-     background-color: "bg-light";
- }
  .container {
     max-width: 960px;
   }
+  body{
+    background-color: #f3f4ed;
+  }
+  h1{
+    font-family: 'Lexend Deca', sans-serif;
+  }
+
+  /* Badges */
+
+  .app-download {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    direction: rtl;
+    background-color: #dc1e4d;
+    top: 0;
+    position: fixed;
+    flex-direction: column;
+    z-index: 100;
+    left: 2rem;
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    box-shadow: 1px 2px 14px 5px #00000070;
+    padding: 1rem;
+    }
+    :focus {
+      outline: none;
+    }
+    .badge{
+      margin-top: .5rem;
+      margin-bottom: .5rem;
+      color: #fff;
+      cursor: pointer;
+    }
+    #first-title {
+      font-size: 1rem;
+    }  
+    #second-title{
+      font-size:.8rem;
+    }
+
+  
+
   

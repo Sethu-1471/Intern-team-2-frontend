@@ -5,7 +5,7 @@ function Comp1() {
         <div>
             <div className="container">
                 <div className="py-5 text-center">
-                    <h2>Checkout</h2>
+                    <h1>Checkout</h1>
                 </div>
 
             </div>
