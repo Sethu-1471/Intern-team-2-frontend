@@ -1,16 +1,38 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import  './Login.css';
 import logo from '../../Assets/favicon.png';
 import {login} from '../../api/index';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
-class Login extends Component {
-    state = {
-        name: "",
-        password: "",
+function Login() {
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const history = useHistory();
+
+    const onSave = () => {
+        let payload = {
+            username: name,
+            password
+        }
+        login(payload).then(res => {
+            if (res.data.status) {
+                toast(res.data.message);
+                localStorage.setItem("jwt", res.data.token);
+            localStorage.setItem("user", JSON.stringify(res.data.user));
+            if (res.data.user.isAdmin) {
+              localStorage.setItem("isAdmin", res.data.user.isAdmin);
+            } else {
+              localStorage.removeItem("isAdmin");
+                }
+                history.push("/courselist");
+            } else {
+                toast.error(res.data.message);
+            }
+        })
     }
-    render() {
-        return (
 
+        return (
             <div className="container-scroller">
                 <div className="container-fluid page-body-wrapper full-page-wrapper">
                     <div className="content-wrapper d-flex align-items-stretch auth auth-img-bg">
@@ -31,7 +53,7 @@ class Login extends Component {
                                                         <i className="fa fa-user text-primary"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text"  onChange={e => this.onNameChange(e.target.value)} value={this.state.name}className="form-control form-control-lg border-left-0" id="exampleInputEmail" placeholder="Username" />
+                                                <input type="text"  onChange={e => setName(e.target.value)} className="form-control form-control-lg border-left-0" id="exampleInputEmail" placeholder="Username" />
                                             </div>
                                         </div>
                                         <div className="form-group">
@@ -42,7 +64,7 @@ class Login extends Component {
                                                         <i className="fa fa-lock text-primary"></i>
                                                     </span>
                                                 </div>
-                                                <input type="password" onChange={e => this.onPasswordChange(e.target.value)} value={this.state.password} className="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password" />
+                                                <input type="password" onChange={e => setPassword(e.target.value)}  className="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password" />
                                             </div>
                                         </div>
                                         <div className="my-2 d-flex justify-content-between align-items-center">
@@ -55,7 +77,7 @@ class Login extends Component {
                                             <a href="#" className="auth-link text-black">Forgot password?</a>
                                         </div>
                                         <div className="my-3">
-                                            <a className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="#" onClick={this.onSave}><span>LOGIN</span></a>
+                                            <a className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" onClick={onSave}><span>LOGIN</span></a>
                                         </div>
                                         <div className="mb-2 d-flex">
                                             <button type="button" className="btn btn-facebook auth-form-btn flex-grow mr-1">
@@ -81,24 +103,5 @@ class Login extends Component {
         );
     }
 
-    onSave = () => {
-
-        login(this.state)
-
-    }
-
-    onNameChange(value) {
-        this.setState({
-            name: value
-        });
-    }
-
-    onPasswordChange(value) {
-        this.setState({
-            password: value
-        });
-    }
-
-}
 
 export default Login;

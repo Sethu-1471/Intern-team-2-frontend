@@ -1,26 +1,45 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Register.css';
 import logo from '../../Assets/favicon.png';
 import { register } from '../../api/index';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom' 
 
+function Register() {
+    const [name, setName] = useState("");
+    const [contactNo, setContactNo] = useState("");
+    const [email, setEmail] = useState("");
+    const [dob, setDob] = useState("");
+    const [country, setCountry] = useState("");
+    const [password, setPassword] = useState("");
+    const [isAdmin, setIsAdmin] = useState("");
+    let history = useHistory();
 
-
-
-class Register extends Component {
-    state = {
-        name: "",
-        contactNo: "",
-        email: "",
-        dob: "",
-        country: "",
-        password: "",
-        isAdmin: false,
-
+    const onSave = () => {
+        let payload = {
+            name,
+            contactNo,
+            email,
+            dob,
+            country,
+            password,
+            isAdmin
+       }
+        console.log(payload);
+        register(payload).then(res => {
+            if (res.data.status) {
+                toast(res.data.message);
+                history.push("/login");
+            } else {
+                toast.error(res.data.message);
+            }
+        })
     }
-    render() {
+
+    const handleDropdownChange = (e) => {
+        setCountry(e.target.value)
+    }
         return (
-
-
             <div className="container-scroller">
                 <div className="container-fluid page-body-wrapper full-page-wrapper">
                     <div className="content-wrapper d-flex align-items-stretch auth auth-img-bg">
@@ -41,7 +60,7 @@ class Register extends Component {
                                                         <i className=" fa fa-user text-primary"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" onChange={e => this.onNameChange(e.target.value)} value={this.state.name} className="form-control form-control-lg border-left-0" placeholder="Username" />
+                                                <input type="text" onChange={e => setName(e.target.value)}  className="form-control form-control-lg border-left-0" placeholder="Username" />
                                             </div>
                                         </div>
 
@@ -53,7 +72,7 @@ class Register extends Component {
                                                         <i className="far fa-phone text-primary"></i>
                                                     </span>
                                                 </div>
-                                                <input type="tel" onChange={e => this.onContactChange(e.target.value)} value={this.state.contact} className="form-control form-control-lg border-left-0" placeholder="Contact no" maxLength="10" />
+                                                <input type="tel" onChange={e => setContactNo(e.target.value)}  className="form-control form-control-lg border-left-0" placeholder="Contact no" maxLength="10" />
                                             </div>
                                         </div>
 
@@ -65,7 +84,7 @@ class Register extends Component {
                                                         <i className="far fa-envelope-open text-primary"></i>
                                                     </span>
                                                 </div>
-                                                <input type="email" onChange={e => this.onEmailChange(e.target.value)} value={this.state.email} className="form-control form-control-lg border-left-0" placeholder="Email" />
+                                                <input type="email" onChange={e => setEmail(e.target.value)}  className="form-control form-control-lg border-left-0" placeholder="Email" />
                                             </div>
                                         </div>
                                         <div className="form-group">
@@ -76,12 +95,12 @@ class Register extends Component {
                                                         <i className="far fa-calendar text-primary"></i>
                                                     </span>
                                                 </div>
-                                                <input type="Date" onChange={e => this.onDobChange(e.target.value)} value={this.state.date} className="form-control form-control-lg border-left-0" placeholder="Dob" />
+                                                <input type="Date" onChange={e => setDob(e.target.value)}  className="form-control form-control-lg border-left-0" placeholder="Dob" />
                                             </div>
                                         </div>
                                         <div className="form-group">
                                             <label>Country</label>
-                                            <select onChange={this.handleDropdownChange} className="form-control form-control-lg" id="exampleFormControlSelect2">
+                                            <select onChange={handleDropdownChange} className="form-control form-control-lg" id="exampleFormControlSelect2">
                                                 <option>Country</option>
                                                 <option>United States of America</option>
                                                 <option>United Kingdom</option>
@@ -98,19 +117,18 @@ class Register extends Component {
                                                         <i className="fa fa-lock text-primary"></i>
                                                     </span>
                                                 </div>
-                                                <input type="password" onChange={e => this.onPasswordChange(e.target.value)} value={this.state.password} className="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password" />
+                                                <input type="password" onChange={e => setPassword(e.target.value)} className="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password" />
                                             </div>
                                         </div>
                                         <div className="form-group">
-                                            <label>Admin</label>
                                             <div className="d-flex">
                                                 <span>
-                                                    <input onChange={e => this.onRadioChange(e.target.value)}  type="radio" id="admin" name="Admin" value="Admin" />
-                                                    <label for="admin">Yes</label>
+                                                    <input onChange={e => setIsAdmin(e.target.value)}  type="radio" id="admin" name="Admin" value="true" />
+                                                    <label for="admin">Teacher</label>
                                                 </span>
                                                 <span>
-                                                    <input onChange={e => this.onRadioChange(e.target.value)}   type="radio" id="admin1" name="Admin" value="User" />
-                                                    <label for="admin">No</label>
+                                                    <input onChange={e => setIsAdmin(e.target.value)}   type="radio" id="admin1" name="Admin" value="false" />
+                                                    <label for="admin">Student</label>
                                                 </span>
                                             </div>
 
@@ -126,7 +144,7 @@ class Register extends Component {
                                             </div>
                                         </div>
                                         <div className="mt-3">
-                                            <a className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="#" onClick={this.onSave} >SIGN UP</a>
+                                            <a className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="#" onClick={onSave} >SIGN UP</a>
                                         </div>
                                         <div className="text-center mt-4 font-weight-light">
                                             Already have an account? <a href="Login_Page.html" className="text-primary">Login</a>
@@ -144,52 +162,6 @@ class Register extends Component {
             </div>
         );
     }
-    onSave = () => {
-
-        register(this.state)
-
-    }
-    onRadioChange(value){
-        this.setState({
-         isAdmin: value === 'Admin'
-        })
-    }
-
-
-    onNameChange(value) {
-        this.setState({
-            name: value
-        });
-    }
-
-    onContactChange(value) {
-        this.setState({
-            contactNo: value
-        });
-    }
-
-    onEmailChange(value) {
-        this.setState({
-            email: value
-        });
-    }
-
-    onDobChange(value) {
-        this.setState({
-            dob: value
-        });
-    }
-
-
-    onPasswordChange(value) {
-        this.setState({
-            password: value
-        });
-    }
-    handleDropdownChange = (e) => {
-        this.setState({ country: e.target.value });
-    }
-
-}
+    
 
 export default Register;

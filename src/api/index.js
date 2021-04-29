@@ -6,6 +6,7 @@ const api = axios.create({
 
 export const register = (payload) => api.post(`/auth/register`, payload);
 export const login = (payload) => api.post(`/auth/login`, payload);
+
 export const createCourse = (payload) =>
   api.post(`/course/createcourse`, payload);
 export const getCoursebyId = (id) =>
