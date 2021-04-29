@@ -11,7 +11,7 @@ function App() {
                 <Route path="/" exact>
                     <Home />
                 </Route>
-                <Route path="/courses" exact>
+                <Route path="/courses">
                     <Courses />
                 </Route>
                 <Route path="/admin" exact component={AdminPage} />
@@ -21,3 +21,5 @@ function App() {
 }
 
 export default App;
+
+//added my courses page and link tags
