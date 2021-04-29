@@ -1,31 +1,28 @@
-import "./App.css";
-import { Switch, Route } from "react-router-dom";
-import Courses from "./Pages/Courses/Courses";
-import Home from "./Pages/Home/Home";
-import AdminPage from "./Pages/Admin/Admin";
-import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
+import CourseAddMainPage from "./components/CourseCreate/MainPageOne";
+import CourseEditSubPage from "./components/CourseCreate/MainPageTwo";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Header from "./components/Header/Header";
 
 function App() {
-    return (
-        <>
-            <Switch>
-                <Route path="/login">
-                    <Login />
-                </Route>
-                <Route path="/register">
-                    <Register />
-                </Route>
-                <Route path="/" exact>
-                    <Home />
-                </Route>
-                <Route path="/courses" exact>
-                    <Courses />
-                </Route>
-                <Route path="/admin" exact component={AdminPage} />
-            </Switch>
-        </>
-    );
+  return (
+    <>
+      <ToastContainer />
+      <Header />
+      <Switch>
+        {/* <Route path="/" exact component={Landing} /> */}
+        {/* <Route path="/courses" exact>
+          <Courses />
+        </Route> */}
+        <Route path="/addcourse" exact component={CourseAddMainPage} />
+        <Route
+          path={`/editsubcontent/:id`}
+          exact
+          component={CourseEditSubPage}
+        />
+      </Switch>
+    </>
+  );
 }
 
 export default App;
