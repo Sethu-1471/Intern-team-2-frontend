@@ -1,5 +1,3 @@
-import "./App.css";
-import { Switch, Route } from "react-router-dom";
 import CourseAddMainPage from "./components/CourseCreate/MainPageOne";
 import CourseEditSubPage from "./components/CourseCreate/MainPageTwo";
 import { ToastContainer } from "react-toastify";
