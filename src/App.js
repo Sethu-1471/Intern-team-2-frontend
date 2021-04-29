@@ -21,5 +21,3 @@ function App() {
 }
 
 export default App;
-
-//added my courses page and link tags
