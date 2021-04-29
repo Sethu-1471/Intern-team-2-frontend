@@ -1,0 +1,43 @@
+video,
+.w_70vw {
+  width: 70vw;
+}
+
+.Head {
+  background-color: rgba(0, 0, 0, 0.06);
+  /* color: white; */
+  font-weight: 600;
+  padding: 15px;
+  border: 1px solid #dedfe0;
+  border-right: none;
+  box-shadow: 0 6px 12px rgb(134 140 150 / 65%);
+  /* margin-bottom: 8px; */
+  margin-top: 1px;
+}
+
+.border_gr {
+  border-top: 1px solid #e8e9eb;
+}
+
+.border_right {
+  border-right: 1px solid #dedfe0;
+}
+
+.c_title {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 1020px) {
+  video,
+  .w_70vw {
+    width: 60vw;
+  }
+}
+@media only screen and (max-width: 768px) {
+  video,
+  .w_70vw {
+    width: 100%;
+  }
+}

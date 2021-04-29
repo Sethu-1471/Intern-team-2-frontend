@@ -13,6 +13,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import LockIcon from '@material-ui/icons/Lock';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -100,12 +101,15 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem onClick={handleMobileMenuClose}>
-        <IconButton color="inherit">
-            <LibraryBooksIcon />
-            <h6 style={{fontWeight: 500,fontSize: '16px',letterSpacing: '0.05em',marginLeft: '4px',marginBottom:'0'}}>
-                Your Courses
-            </h6>
-        </IconButton>
+        <Link to="/courses/my">
+          <IconButton color="inherit">
+              <LibraryBooksIcon />
+              <h6 style={{fontWeight: 500,fontSize: '16px',letterSpacing: '0.05em',marginLeft: '4px',marginBottom:'0'}}>
+                  Your Courses
+              </h6>
+          </IconButton>
+        </Link>
+
       </MenuItem>
       <MenuItem onClick={handleMobileMenuClose}>
         <IconButton
@@ -133,7 +137,7 @@ export default function Header() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             LOGO
@@ -153,12 +157,14 @@ export default function Header() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton color="inherit">
-                <LibraryBooksIcon />
-                <h6 style={{fontWeight: 500,fontSize: '16px',letterSpacing: '0.05em',marginLeft: '4px',marginBottom:'0'}}>
-                    Your Courses
-                </h6>
-            </IconButton>
+            <Link to="/courses/my">
+              <IconButton color="inherit">
+                  <LibraryBooksIcon />
+                  <h6 style={{fontWeight: 500,fontSize: '16px',letterSpacing: '0.05em',marginLeft: '4px',marginBottom:'0'}}>
+                      Your Courses
+                  </h6>
+              </IconButton>
+            </Link>
             <IconButton
               edge="end"
               aria-controls={menuId}
@@ -193,6 +199,7 @@ export default function Header() {
       </AppBar>
       {renderMobileMenu}
       {/* {renderMenu} */}
+      <div className="" style={{height:64}}></div>
     </div>
   );
 }
