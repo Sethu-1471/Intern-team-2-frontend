@@ -1,0 +1,86 @@
+body{
+    font-size: 1rem;
+    font-family: "PTSans", sans-serif;
+    font-weight: initial;
+    line-height: normal;
+    -webkit-font-smoothing: antialiased;
+    
+}
+
+.auth .login-half-bg {
+    background: url(../../Assets/login-bg.jpg);
+    background-size: cover;
+   
+    
+}
+
+
+.flex-row{
+    flex-direction: row !important;
+}
+
+
+.auth form .auth-link {
+    font-size: 0.8125rem;
+}
+
+.text-black {
+    color: #000;
+}
+
+a{
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.form-check .form-check-label {
+    min-height: 18px;
+    display: block;
+    margin-left: 0rem;
+    font-size: 0.8125rem;
+  
+}
+
+
+.text-muted{
+    color: #686868 !important;
+}
+
+.form-check-label {
+    margin-bottom: 0;
+}
+
+.my-3 {
+    margin-bottom: 1rem !important;
+}
+
+
+.auth form .auth-form-btn {
+    height: 50px;
+    line-height: 1.5;
+}
+
+.btn-facebook {
+    background: #3b579d;
+    color: #ffffff;
+}
+
+.btn{
+    font-size: 1rem;
+    font-weight: 400;
+
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.625rem 1rem;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+
+.mr-1 {
+    margin-right: 0.25rem !important;
+}

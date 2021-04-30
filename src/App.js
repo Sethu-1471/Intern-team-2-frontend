@@ -1,23 +1,39 @@
-import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import Courses from "./Pages/Courses/Courses";
-import Home from "./Pages/Home/Home";
-import AdminPage from "./Pages/Admin/Admin";
+import "./App.css"
+import register from "./components/Register/Register"
+import login from "./components/Login/Login.jsx"
+import CourseAddMainPage from "./components/CourseCreate/MainPageOne";
+import CourseEditSubPage from "./components/CourseCreate/MainPageTwo";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Header from "./components/Header/Header";
 
 function App() {
-    return (
-        <>
-            <Switch>
-                <Route path="/" exact>
-                    <Home />
-                </Route>
-                <Route path="/courses" exact>
-                    <Courses />
-                </Route>
-                <Route path="/admin" exact component={AdminPage} />
-            </Switch>
-        </>
-    );
+
+  const correctDataHandler = (trans) => {
+    if (!localStorage.getItem("jwt")) {
+      trans.redirect('/login')
+      console.log("dssf");
+    }
+    console.log("dssf");
+  }
+
+  return (
+    <>
+      <ToastContainer />
+      <Header />
+      <Switch>
+        <Route path="/register" exact component={register}/>
+        <Route path="/login" exact component={login} />
+        <Route path="/addcourse" component={CourseAddMainPage}  onEnter={ correctDataHandler }/>
+        <Route
+          path={`/editsubcontent/:id`}
+          component={CourseEditSubPage}
+          onEnter={ correctDataHandler }
+        />
+      </Switch>
+    </>
+  );
 }
 
 export default App;
