@@ -13,6 +13,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import LockIcon from "@material-ui/icons/Lock";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import { useHistory } from "react-router";
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -80,6 +81,8 @@ export default function Header() {
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const history = useHistory();
+
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -115,7 +118,7 @@ export default function Header() {
           </h6>
         </IconButton>
       </MenuItem>
-      <MenuItem onClick={handleMobileMenuClose}>
+      <MenuItem onClick={e => history.push("/profile")}>
         <IconButton aria-controls="primary-search-account-menu" color="inherit">
           <AccountCircle />
           <h6
@@ -188,7 +191,7 @@ export default function Header() {
                 Your Courses
               </h6>
             </IconButton>
-            <IconButton edge="end" aria-controls={menuId} color="inherit">
+            <IconButton edge="end" aria-controls={menuId} color="inherit" onClick={e => history.push("/profile")}>
               <AccountCircle />
               <h6
                 style={{

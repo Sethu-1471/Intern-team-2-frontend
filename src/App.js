@@ -8,6 +8,7 @@ import AdminPage from "./components/AdminPage/AdminPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header/Header";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
           onEnter={ correctDataHandler }
         />
         <Route path="/admin" exact component={AdminPage} />
+        <Route path="/profile" exact component={ProfilePage} />
       </Switch>
     </>
   );
