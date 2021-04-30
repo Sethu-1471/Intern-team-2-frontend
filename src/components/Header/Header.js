@@ -13,6 +13,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import LockIcon from "@material-ui/icons/Lock";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import { useHistory } from "react-router-dom"
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -77,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header() {
+  const history = useHistory();
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -131,7 +134,10 @@ export default function Header() {
           </h6>
         </IconButton>
       </MenuItem>
-      <MenuItem onClick={handleMobileMenuClose}>
+      <MenuItem onClick={async () => {
+              await localStorage.clear();
+              history.push('/login');
+             }}>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge color="secondary">
             <LockIcon />
@@ -202,7 +208,10 @@ export default function Header() {
                 Profile
               </h6>
             </IconButton>
-            <IconButton aria-label="show 4 new mails" color="inherit">
+            <IconButton aria-label="show 4 new mails" color="inherit" onClick={() => {
+              localStorage.clear();
+              history.push('/login');
+             }}>
               <Badge color="secondary">
                 <LockIcon />
                 <h6

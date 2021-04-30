@@ -4,6 +4,7 @@ import logo from '../../Assets/favicon.png';
 import {login} from '../../api/index';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
+import { asyncLocalStorage } from "../../AsyncLocalStorage";
 
 function Login() {
     const [name, setName] = useState("");
@@ -18,14 +19,14 @@ function Login() {
         login(payload).then(res => {
             if (res.data.status) {
                 toast(res.data.message);
-                localStorage.setItem("jwt", res.data.token);
-            localStorage.setItem("user", JSON.stringify(res.data.user));
-            if (res.data.user.isAdmin) {
-              localStorage.setItem("isAdmin", res.data.user.isAdmin);
-            } else {
-              localStorage.removeItem("isAdmin");
-                }
-                history.push("/courselist");
+                if (res.data.user.isAdmin) {
+                    localStorage.setItem("isAdmin", res.data.user.isAdmin);
+                  } else {
+                    localStorage.removeItem("isAdmin");
+                      }
+                localStorage.setItem("jwt", res.data.token)
+                localStorage.setItem("user", JSON.stringify(res.data.user))
+                history.push("/courselist");  
             } else {
                 toast.error(res.data.message);
             }

@@ -4,33 +4,32 @@ import register from "./components/Register/Register"
 import login from "./components/Login/Login.jsx"
 import CourseAddMainPage from "./components/CourseCreate/MainPageOne";
 import CourseEditSubPage from "./components/CourseCreate/MainPageTwo";
+import CourseList from "./components/CoursesHome/CoursesList"
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header/Header";
+import { ProtectedRoute } from "./ProtectedRoute";
+import { useLocation } from 'react-router-dom'
 
 function App() {
-
-  const correctDataHandler = (trans) => {
-    if (!localStorage.getItem("jwt")) {
-      trans.redirect('/login')
-      console.log("dssf");
-    }
-    console.log("dssf");
-  }
-
+  const location = useLocation();
+  const list = ['/login', '/register', '/']
   return (
     <>
       <ToastContainer />
-      <Header />
+      {list.includes(location.pathname) ? null : <Header />}
       <Switch>
-        <Route path="/register" exact component={register}/>
-        <Route path="/login" exact component={login} />
-        <Route path="/addcourse" component={CourseAddMainPage}  onEnter={ correctDataHandler }/>
-        <Route
+      {/* <ProtectedRoute path="/" exact component={login}/> */}
+      <ProtectedRoute path="/register" exact component={register}/>
+        <ProtectedRoute path="/login" exact component={login} />
+        <ProtectedRoute path="/courselist" component={CourseList} />
+        <ProtectedRoute path={`/courselist/token`} component={CourseList} />
+        <ProtectedRoute path="/addcourse" component={CourseAddMainPage} />
+        <ProtectedRoute
           path={`/editsubcontent/:id`}
           component={CourseEditSubPage}
-          onEnter={ correctDataHandler }
         />
+        <Route path="*" component={() => "404 Not Found"} />
       </Switch>
     </>
   );
