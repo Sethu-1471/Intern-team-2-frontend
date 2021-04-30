@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://hidden-hamlet-43774.herokuapp.com",
+  baseURL: "http://localhost:3400",
 });
 
 let headers = {
