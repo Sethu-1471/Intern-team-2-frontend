@@ -33,6 +33,8 @@ const useStyles = makeStyles({
 
 function CourseCard({content}) {
   const classes = useStyles();
+  const history = useHistory();
+
   return (
     <Card className={classes.root} >
       <CardActionArea>
@@ -51,7 +53,7 @@ function CourseCard({content}) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" variant="contained" color="primary">
+        <Button size="small" variant="contained" color="primary" onClick={() => history.push('/editsubcontent/' + content._id)}>
           admin panel
         </Button>
         <Button size="small" color="primary">
@@ -68,7 +70,6 @@ export default function CoursesList() {
   const history = useHistory();
 
   useEffect(() => {
-    console.log("rrre" + localStorage.getItem("jwt"));
     getCourseByUserId(localStorage.getItem("jwt")).then(res => {
       if (res.data.status) {
         // toast(res.data.message);
