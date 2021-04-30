@@ -1,4 +1,5 @@
 import { Switch, Route } from "react-router-dom";
+import "components/FontawesomeIcons";
 import "./App.css"
 import register from "./components/Register/Register"
 import login from "./components/Login/Login.jsx"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Register.css';
 import logo from '../../Assets/favicon.png';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { register } from '../../api/index';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom' 
@@ -58,6 +59,7 @@ function Register() {
                                                 <div className="input-group-prepend bg-transparent">
                                                     <span className="input-group-text bg-transparent border-right-0">
                                                         <i className=" fa fa-user text-primary"></i>
+                                                        <FontAwesomeIcon icon="user" /> 
                                                     </span>
                                                 </div>
                                                 <input type="text" onChange={e => setName(e.target.value)}  className="form-control form-control-lg border-left-0" placeholder="Username" />
@@ -70,6 +72,7 @@ function Register() {
                                                 <div className="input-group-prepend bg-transparent">
                                                     <span className="input-group-text bg-transparent border-right-0">
                                                         <i className="far fa-phone text-primary"></i>
+                                                        <FontAwesomeIcon icon="Phone" /> 
                                                     </span>
                                                 </div>
                                                 <input type="tel" onChange={e => setContactNo(e.target.value)}  className="form-control form-control-lg border-left-0" placeholder="Contact no" maxLength="10" />
@@ -82,6 +85,7 @@ function Register() {
                                                 <div className="input-group-prepend bg-transparent">
                                                     <span className="input-group-text bg-transparent border-right-0">
                                                         <i className="far fa-envelope-open text-primary"></i>
+                                                        <FontAwesomeIcon icon="envelope" /> 
                                                     </span>
                                                 </div>
                                                 <input type="email" onChange={e => setEmail(e.target.value)}  className="form-control form-control-lg border-left-0" placeholder="Email" />
@@ -93,6 +97,7 @@ function Register() {
                                                 <div className="input-group-prepend bg-transparent">
                                                     <span className="input-group-text bg-transparent border-right-0">
                                                         <i className="far fa-calendar text-primary"></i>
+                                                        <FontAwesomeIcon icon="birthdaycake" /> 
                                                     </span>
                                                 </div>
                                                 <input type="Date" onChange={e => setDob(e.target.value)}  className="form-control form-control-lg border-left-0" placeholder="Dob" />
@@ -115,6 +120,7 @@ function Register() {
                                                 <div className="input-group-prepend bg-transparent">
                                                     <span className="input-group-text bg-transparent border-right-0">
                                                         <i className="fa fa-lock text-primary"></i>
+                                                        <FontAwesomeIcon icon="lock" /> 
                                                     </span>
                                                 </div>
                                                 <input type="password" onChange={e => setPassword(e.target.value)} className="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password" />
