@@ -46,7 +46,7 @@ const ProfilePage = () => {
     return (
         <div className="profile-container">
             <div className="profile-picture">
-                <i class="fas fa-user-circle"></i>
+                <i className="fas fa-user-circle"></i>
             </div>
             <TableBody>
                 {detail.map((row) => (

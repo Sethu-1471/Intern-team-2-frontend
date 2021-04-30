@@ -16,14 +16,14 @@ const StudentsSubmission = () => {
                     style={{ backgroundColor: "green" }}
                     title="accept"
                 >
-                    <i class="fas fa-check"></i>
+                    <i className="fas fa-check"></i>
                 </div>
                 <div
                     className="rounded-icon-sm"
                     style={{ backgroundColor: "red" }}
                     title="decline"
                 >
-                    <i class="fas fa-times"></i>
+                    <i className="fas fa-times"></i>
                 </div>
             </div>
         </div>
