@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import  './Login.css';
+import '../Login/Login.css';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import logo from '../../Assets/favicon.png';
 import {login} from '../../api/index';
 import { toast } from 'react-toastify';
@@ -51,7 +52,7 @@ function Login() {
                                             <div className="input-group">
                                                 <div className="input-group-prepend bg-transparent">
                                                     <span className="input-group-text bg-transparent border-right-0">
-                                                        <i className="fa fa-user text-primary"></i>
+                                                        <i className="fa fa-user text-primary" style={ {margin: "auto", position: "relative", top: "-4px"}}></i>
                                                     </span>
                                                 </div>
                                                 <input type="text"  onChange={e => setName(e.target.value)} className="form-control form-control-lg border-left-0" id="exampleInputEmail" placeholder="Username" />

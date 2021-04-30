@@ -71,8 +71,8 @@ function Register() {
                                             <div className="input-group">
                                                 <div className="input-group-prepend bg-transparent">
                                                     <span className="input-group-text bg-transparent border-right-0">
-                                                        <i className="far fa-phone text-primary"></i>
-                                                        <FontAwesomeIcon icon="Phone" /> 
+                                                        <i className="fa fa-phone text-primary"></i>
+                                                        <FontAwesomeIcon icon="phone-alt" /> 
                                                     </span>
                                                 </div>
                                                 <input type="tel" onChange={e => setContactNo(e.target.value)}  className="form-control form-control-lg border-left-0" placeholder="Contact no" maxLength="10" />
@@ -96,8 +96,8 @@ function Register() {
                                             <div className="input-group">
                                                 <div className="input-group-prepend bg-transparent">
                                                     <span className="input-group-text bg-transparent border-right-0">
-                                                        <i className="far fa-calendar text-primary"></i>
-                                                        <FontAwesomeIcon icon="birthdaycake" /> 
+                                                        <i className="fa fa-birthday-cake text-primary"></i>
+                                                        <FontAwesomeIcon icon="birthday-cake" /> 
                                                     </span>
                                                 </div>
                                                 <input type="Date" onChange={e => setDob(e.target.value)}  className="form-control form-control-lg border-left-0" placeholder="Dob" />
