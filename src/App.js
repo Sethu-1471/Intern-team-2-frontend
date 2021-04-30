@@ -4,6 +4,7 @@ import register from "./components/Register/Register"
 import login from "./components/Login/Login.jsx"
 import CourseAddMainPage from "./components/CourseCreate/MainPageOne";
 import CourseEditSubPage from "./components/CourseCreate/MainPageTwo";
+import AdminPage from "./components/AdminPage/AdminPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header/Header";
@@ -31,6 +32,7 @@ function App() {
           component={CourseEditSubPage}
           onEnter={ correctDataHandler }
         />
+        <Route path="/admin" exact component={AdminPage} />
       </Switch>
     </>
   );
