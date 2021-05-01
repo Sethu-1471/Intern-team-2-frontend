@@ -7,6 +7,7 @@ import CourseEditSubPage from "./components/CourseCreate/MainPageTwo";
 import CourseList from "./components/CoursesHome/CoursesList";
 import Coursedetail from "./components/Student/CourseStudy/Coursedetail";
 import VideoView from "./components/ModuleContentView/VideoView"
+import Error404 from "./components/Error/Error404"
 import MyCourse from "./components/Student/MyCourse"
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -48,7 +49,7 @@ function App() {
         <ProtectedRoute path={"/profile"} component={ProfilePage} />
         <ProtectedRoute path={"/mycourse"} component={MyCourse} />
         <ProtectedRoute path={"/videoview/:cid/:mcid"} component={VideoView} />
-        <Route path="*" component={() => "404 Not Found"} />
+        <Route path="*" component={() => "Error404"} />
       </Switch>
     </>
   );
