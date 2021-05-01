@@ -49,7 +49,7 @@ function App() {
         <ProtectedRoute path={"/profile"} component={ProfilePage} />
         <ProtectedRoute path={"/mycourse"} component={MyCourse} />
         <ProtectedRoute path={"/videoview/:cid/:mcid"} component={VideoView} />
-        <Route path="*" component={() => "Error404"} />
+        <Route path="*" component={Error404} />
       </Switch>
     </>
   );
