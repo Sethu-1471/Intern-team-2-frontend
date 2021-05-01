@@ -1,6 +1,8 @@
-body{
-   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-   overflow-x: scroll;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  overflow-x: scroll;
 }
 
 /* logo images style */
@@ -241,7 +243,7 @@ label {
   color: #392c70 !important;
 }
 .far {
-  font-family: Font Awesome\5 Free;
+  font-family: Font awesome\5 Free;
 }
 .far {
   font-weight: 400;
@@ -319,10 +321,10 @@ p {
 
 /* mobile view */
 @media (min-width: 992px) {
-   .boxed-layout .container-scroller {
-     background: #e5ecf0;
-     padding: 0 calc((100% - 1200px) / 2);
-   }
+  .boxed-layout .container-scroller {
+    background: #e5ecf0;
+    padding: 0 calc((100% - 1200px) / 2);
+  }
 }
 
 @media (min-width: 992px) {
@@ -337,4 +339,3 @@ p {
     margin: auto;
   }
 }
-

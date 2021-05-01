@@ -8,7 +8,7 @@ import CourseList from "./components/CoursesHome/CoursesList";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header/Header";
-import ProfilePage from "./components/Profile/ProfilePage"
+import ProfilePage from "./components/Profile/ProfilePage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useLocation } from "react-router-dom";
 
@@ -17,12 +17,12 @@ import StudentPaymentEnroll from "./components/Student/PaymentEnroll";
 
 function App() {
   const location = useLocation();
-  console.log(location.pathname.split('/')[1]);
+  console.log(location.pathname.split("/")[1]);
   const list = ["login", "register", "/", "payment", ""];
   return (
     <>
       <ToastContainer />
-      {list.includes(location.pathname.split('/')[1]) ? null : <Header />}
+      {list.includes(location.pathname.split("/")[1]) ? null : <Header />}
       <Switch>
         {/* <ProtectedRoute path="/" exact component={login}/> */}
         <ProtectedRoute path="/register" exact component={register} />
@@ -34,7 +34,10 @@ function App() {
           path={`/editsubcontent/:id`}
           component={CourseEditSubPage}
         />
-        <ProtectedRoute path={`/payment/:id`} component={StudentPaymentEnroll} />
+        <ProtectedRoute
+          path={`/payment/:id`}
+          component={StudentPaymentEnroll}
+        />
         <ProtectedRoute path={"/profile"} component={ProfilePage} />
         <Route path="*" component={() => "404 Not Found"} />
       </Switch>
