@@ -270,6 +270,10 @@ a {
   background: #dc4a38;
   color: #ffffff;
 }
+.btn-facebook {
+  background: #4700eb;
+  color: #ffffff;
+}
 
 .btn i {
   font-size: 1rem;
