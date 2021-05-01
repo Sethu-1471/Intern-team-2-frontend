@@ -27,7 +27,7 @@ function Comp2() {
     EnrollCourse(id).then((res) => {
       if (res.data.status) {
         toast(res.data.message);
-        // history.push(`/mycourse`);
+        history.push(`/course/${id}`);
       } else {
         toast.error(res.data.message);
       }
