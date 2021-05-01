@@ -10,7 +10,6 @@ import Typography from "@material-ui/core/Typography";
 import { getCourseByUserId, getAllPublicCourse,deleteCourse, getUser } from "../../api";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
@@ -52,40 +51,16 @@ function CourseCard({ content, admin, deleteCourseHandle, user }) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      {admin ? (
         <CardActions>
           <Button
             size="small"
             variant="contained"
             color="primary"
-            onClick={() => history.push("/editsubcontent/" + content._id)}
+              onClick={() => history.push("/course/" + content._id)}
           >
-            admin panel
-          </Button>
-          <Button size="small" color="primary" onClick={() => {
-            if (window.confirm("Delete Course reflect to registered user also, continue to delete ?")) {
-              deleteCourseHandle(content._id);
-            }
-          }}>
-            Delete
+            Go to course
           </Button>
         </CardActions>
-      ) : (
-        <CardActions>
-          <Button
-            size="small"
-            variant="contained"
-            color="primary"
-              onClick={() => history.push("/payment/" + content._id)}
-              disabled={content.userEnrolled.find(o => o.user === user._id)}
-          >
-            {content.userEnrolled.find(o => o.user === user._id) ? "Already Enrolled" : "Enroll"}
-          </Button>
-          <Button size="small" color="primary" disabled>
-            {content.registration ? "free" : "cost"}
-          </Button>
-        </CardActions>
-      )}
     </Card>
   );
 }
@@ -139,41 +114,37 @@ export default function CoursesList() {
   return (
     <div>
       <div className={classes.header}>
-        <h4>{admin ? "My Course" : "Course for you..!"}</h4>
+        <h4>Registered Course</h4>
         <Button
           variant="contained"
           color="primary"
-          onClick={() => admin ? history.push("/addcourse") : history.push("/mycourse")}
+          onClick={() => history.push("/courselist")}
         >
-          {admin ? "add course" : "Explore my course"}
+          See all course
         </Button>
       </div>
 
       {courses[0] ? (
         <div className="row m-0">
-          {courses.map((d, i) => (
-            <div
-              key={i}
-              className="col-12 col-md-4 mt-5 d-flex justify-content-center"
-            >
-              <CourseCard content={d} admin={admin} user={user} deleteCourseHandle={deleteCourseHandle} />
-            </div>
-          ))}
+                  {courses.map((d, i) => {
+                      if (d.userEnrolled.find(o => o.user === user._id)) {
+                          return (
+                            <div
+                            key={i}
+                            className="col-12 col-md-4 mt-5 d-flex justify-content-center"
+                          >
+                            <CourseCard content={d} admin={admin} user={user} deleteCourseHandle={deleteCourseHandle} />
+                         </div>
+                          )
+                      }
+                  })}
         </div>
       ) : (
         <div style={{ margin: "20px 20px" }}>
           <h4>
-            {admin ? "You not created any course" : "No Course Available"}
+            You not regsitered for any course
           </h4>
-          {admin && (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => history.push("/addcourse")}
-            >
-              Create Course
-            </Button>
-          )}
+         
         </div>
       )}
     </div>

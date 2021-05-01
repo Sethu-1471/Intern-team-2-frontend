@@ -26,6 +26,7 @@ api.interceptors.request.use(function (config) {
 export const register = (payload) => api.post(`/auth/register`, payload);
 export const login = (payload) => api.post(`/auth/login`, payload);
 export const sendOTP = (payload) => api.post(`/auth/otp`, payload);
+export const getUser = () => api.get(`/auth/getuser`);
 
 //Course
 export const createCourse = (payload) =>
@@ -35,12 +36,42 @@ export const createCourse = (payload) =>
 export const getAllPublicCourse = (id) => api.get(`/course/getallpubliccourse`);
 
 //Get Course by course id
-export const getCoursebyId = (id) =>
+export const getCoursebyId = (id, auth) =>
   api.get(`/course/getcoursebyid`, {
     params: {
-      course_id: id,
+      course_id: id
     },
   });
+
+  
+//Getting all tutorial items
+export const getVideo = (id, vid, type) =>
+  api.get(`/course/getvideo`, {
+    params: {
+      course_id: id,
+      video_id: vid,
+      type: type
+    },
+  });
+    
+
+export const getStudentEnrollCourseWithId = (id) =>
+  api.get(`/course/getstudentenrollcoursebyid`, {
+    params: {
+      course_id: id
+    },
+  });
+
+ //delete Module Content
+ export const deleteSubModule = (params) => api.delete(`/course/deletesubmodule`, {
+  params: params
+ });
+
+export const deleteCourse = (id) => api.delete(`/course/deletecourse`, {
+  params: {
+     course_id: id
+   }
+ })
 
 //Get Course By Teacher user id
 export const getCourseByUserId = () => api.get(`/course/getcoursebyuserid`);

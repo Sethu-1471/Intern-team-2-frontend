@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -87,6 +87,15 @@ export default function PrimarySearchAppBar() {
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [admin, setAdmin] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("isAdmin")) {
+      setAdmin(true);
+    } else {
+      setAdmin(false);
+    }
+  })
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -143,7 +152,7 @@ export default function PrimarySearchAppBar() {
           <p>Notifications</p>
         </MenuItem>
       ) : (
-        <MenuItem>
+        <MenuItem onClick={() => history.push("/mycourse")}>
           <IconButton aria-label="show 11 new notifications" color="inherit">
             <AllInbox />
           </IconButton>
@@ -190,7 +199,7 @@ export default function PrimarySearchAppBar() {
             noWrap
             onClick={() => history.push("/courselist")}
           >
-            Co-Tutor
+            Co-Tutor<small style={{ fontSize: 10 }}>{admin ? "/Teacher" : "/Student"}</small>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -217,7 +226,8 @@ export default function PrimarySearchAppBar() {
             ) : (
               <IconButton
                 aria-label="show 17 new notifications"
-                color="inherit"
+                  color="inherit"
+                  onClick={() => history.push("/mycourse")}
               >
                 <AllInbox />
               </IconButton>

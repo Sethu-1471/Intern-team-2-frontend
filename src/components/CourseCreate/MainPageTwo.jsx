@@ -11,6 +11,7 @@ import {
   uploadVideoTutorial,
   uploadDocsTutorial,
   uploadAssignment,
+  deleteSubModule
 } from "../../api";
 import "./splitpane.css";
 
@@ -90,6 +91,34 @@ export default function MainPageTwo() {
     });
   };
 
+  const deleteContent = (cId, Ref, mcId, mId) => {
+    const typeFind = (ref) => {
+      if (ref === "Document") {
+        return 2;
+      } else if (ref === "Video") {
+        return 1;
+      } else if (ref === "Assignment") {
+        return 3;
+      }
+    }
+    let params = {
+      content_id: cId,
+      type: typeFind(Ref),
+      course_id: id,
+      module_id: mId,
+      moduleContentId: mcId
+    }
+    deleteSubModule(params).then(res => {
+      if (res.data.status) {
+        toast(res.data.message);
+        setCourse(res.data.course);
+        console.log(res.data.course);
+      } else {
+        toast.error(res.data.message);
+      }
+    })
+  }
+
   if (!course) return null;
   return (
     <div>
@@ -114,6 +143,7 @@ export default function MainPageTwo() {
           <p>Availability - {course.availability ? "Public" : "Private"}</p>
           <p>Registration - {course.registration ? "Free" : "Paid"}</p>
           <p>Rating - {course.rating}/10</p>
+          <p>Total registered Students: {course.userEnrolled.length} </p>
         </div>
         <div>
           {course.subModule[0] ? (
@@ -122,6 +152,7 @@ export default function MainPageTwo() {
               uploadAssignment={handleuploadAssignment}
               uploadDocsTutorial={handleUploadDocsTutorial}
               uploadVideoTutorial={handleUploadVideoTutorial}
+              deleteContent={deleteContent}
             />
           ) : (
             <div style={{ padding: "20px 20px" }}>
