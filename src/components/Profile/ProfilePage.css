@@ -1,0 +1,25 @@
+.profile-container {
+    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    padding: 1rem;
+    max-width: 30rem;
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-picture {
+    font-size: 5rem;
+    color: var(--mat-blue);
+}
+
+.profile-title {
+    font-weight: bolder;
+}
+
+.profile-content {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #2e2e2e;
+}

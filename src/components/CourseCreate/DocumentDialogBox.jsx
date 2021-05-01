@@ -8,9 +8,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 export default function DocumentDialogBox(props) {
-    const [open, setOpen] = useState(props.handleShow);
-    const [name, setName] = useState('');
-  const [file, setFile] = useState('');
+  const [open, setOpen] = useState(props.handleShow);
+  const [name, setName] = useState("");
+  const [file, setFile] = useState("");
 
   useEffect(() => {
     setOpen(props.handleShow);
@@ -18,14 +18,14 @@ export default function DocumentDialogBox(props) {
 
   const handleClose = () => {
     props.handleDialog();
-    };
-    
-    const handleSubmit = () => {
-        const formData = new FormData();
-      formData.append("file", file);
-      formData.append("name", name);
-        props.handleDialog(true, formData, 2); //1 represents the video dialog
-      }
+  };
+
+  const handleSubmit = () => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("name", name);
+    props.handleDialog(true, formData, 2); //1 represents the video dialog
+  };
 
   return (
     <div>
@@ -34,7 +34,9 @@ export default function DocumentDialogBox(props) {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Upload Document Tutorial</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          Upload Document Tutorial
+        </DialogTitle>
         <DialogContent>
           {/* <DialogContentText>
             Enter your course submodule name 
@@ -46,8 +48,12 @@ export default function DocumentDialogBox(props) {
             label="Document Tutorial Name"
             fullWidth
             onChange={(e) => setName(e.target.value)}
-            />
-            <input type="file" onChange={(e) => setFile(e.target.files[0])}  accept="application/pdf,.doc,.docx"/>
+          />
+          <input
+            type="file"
+            onChange={(e) => setFile(e.target.files[0])}
+            accept="application/pdf,.doc,.docx"
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

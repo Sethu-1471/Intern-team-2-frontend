@@ -14,10 +14,10 @@ import FormLabel from "@material-ui/core/FormLabel";
 
 export default function AssignmentDialogBox(props) {
   const [open, setOpen] = useState(props.handleShow);
-  const [name, setName] = useState('');
-  const [desc, setDesc] = useState('');
-  const [type, setType] = useState('');
-  
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+  const [type, setType] = useState("");
+
   useEffect(() => {
     setOpen(props.handleShow);
   }, [props.handleShow]);
@@ -28,16 +28,16 @@ export default function AssignmentDialogBox(props) {
 
   const handleSubmit = () => {
     let payload = {
-        name,
-        desc,
-        type
-    }
+      name,
+      desc,
+      type,
+    };
     props.handleDialog(true, payload, 3); //1 represents the video dialog
-    }
-    
-    const handleChangeType = (e) => {
-        setType(e.target.value);
-    }
+  };
+
+  const handleChangeType = (e) => {
+    setType(e.target.value);
+  };
 
   return (
     <div>
@@ -58,16 +58,16 @@ export default function AssignmentDialogBox(props) {
             label="Assignment Name"
             fullWidth
             onChange={(e) => setName(e.target.value)}
-                  />
-            <TextField
+          />
+          <TextField
             id="video-tutorial-Description"
             label="Assignment Description"
             fullWidth
             multiline
             rows={5}
             onChange={(e) => setDesc(e.target.value)}
-                  />
-                  <FormControl component="fieldset" style={{ marginTop: 20 }}> 
+          />
+          <FormControl component="fieldset" style={{ marginTop: 20 }}>
             <FormLabel component="legend">Type of Assignment</FormLabel>
             <RadioGroup
               aria-label="type of assignment"
@@ -75,7 +75,11 @@ export default function AssignmentDialogBox(props) {
               value={type}
               onChange={handleChangeType}
             >
-              <FormControlLabel value="Video" control={<Radio />} label="Video" />
+              <FormControlLabel
+                value="Video"
+                control={<Radio />}
+                label="Video"
+              />
               <FormControlLabel
                 value="Photo"
                 control={<Radio />}

@@ -9,9 +9,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 export default function VideoDialogBox(props) {
   const [open, setOpen] = useState(props.handleShow);
-  const [name, setName] = useState('');
-  const [desc, setDesc] = useState('');
-  const [link, setLink] = useState('');
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+  const [link, setLink] = useState("");
 
   useEffect(() => {
     setOpen(props.handleShow);
@@ -25,10 +25,10 @@ export default function VideoDialogBox(props) {
     let payload = {
       name,
       desc,
-      link
-    }
+      link,
+    };
     props.handleDialog(true, payload, 1); //1 represents the video dialog
-  }
+  };
 
   return (
     <div>
@@ -49,22 +49,22 @@ export default function VideoDialogBox(props) {
             label="Video Tutorial Name"
             fullWidth
             onChange={(e) => setName(e.target.value)}
-                  />
-            <TextField
+          />
+          <TextField
             id="video-tutorial-Description"
             label="Video Tutorial Description"
             fullWidth
             multiline
             rows={5}
             onChange={(e) => setDesc(e.target.value)}
-                  />
-                  <TextField
+          />
+          <TextField
             margin="dense"
             id="youtube link"
             label="Youtube Link"
             fullWidth
             onChange={(e) => setLink(e.target.value)}
-                  />
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
