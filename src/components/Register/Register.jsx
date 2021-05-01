@@ -117,7 +117,8 @@ function Register() {
                     <div className="input-group">
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
-                          <i className="far fa-phone text-primary"></i>
+                          <i className="fa fa-phone text-primary"></i>
+                         
                         </span>
                       </div>
                       <input
@@ -136,7 +137,7 @@ function Register() {
                     <div className="input-group">
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
-                          <i className="far fa-envelope-open text-primary"></i>
+                          <i className="fa fa-envelope-open text-primary"></i>
                         </span>
                       </div>
                       <input
@@ -153,7 +154,8 @@ function Register() {
                     <div className="input-group">
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
-                          <i className="far fa-calendar text-primary"></i>
+                          <i className="fa fa-birthday-cake text-primary"></i>
+                       
                         </span>
                       </div>
                       <input
