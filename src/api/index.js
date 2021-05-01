@@ -25,6 +25,7 @@ api.interceptors.request.use(function (config) {
 //Auth
 export const register = (payload) => api.post(`/auth/register`, payload);
 export const login = (payload) => api.post(`/auth/login`, payload);
+export const sendOTP = (payload) => api.post(`/auth/otp`, payload);
 
 //Course
 export const createCourse = (payload) =>
@@ -45,7 +46,7 @@ export const getCoursebyId = (id) =>
 export const getCourseByUserId = () => api.get(`/course/getcoursebyuserid`);
 
 //Enroll Course
-export const EnrollCourse = (id) => api.post(`/course/enrollcourse`, {id})
+export const EnrollCourse = (id) => api.post(`/course/enrollcourse`, { id });
 
 export const updateCourseSubModuleName = (payload, id) =>
   api.post(`/course/updatecoursesubmodulename`, payload, {
@@ -85,6 +86,7 @@ const apis = {
   getCoursebyId,
   updateCourseSubModuleName,
   uploadVideoTutorial,
-  EnrollCourse
+  EnrollCourse,
+  sendOTP,
 };
 export default apis;

@@ -222,7 +222,11 @@ export default function PrimarySearchAppBar() {
                 <AllInbox />
               </IconButton>
             )}
-            <IconButton aria-label="show 17 new notifications" color="inherit" onClick={() => history.push("/profile")}>
+            <IconButton
+              aria-label="show 17 new notifications"
+              color="inherit"
+              onClick={() => history.push("/profile")}
+            >
               <AccountCircle />
             </IconButton>
             <IconButton
