@@ -27,13 +27,13 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     width: "100%",
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
     padding: "10px 30px",
     borderBottom: "1px solid grey",
-    boxShadow: "0px 0.5px #B0BEC5"
-  }
+    boxShadow: "0px 0.5px #B0BEC5",
+  },
 }));
 
 export default function MainPageOne() {
@@ -91,26 +91,24 @@ export default function MainPageOne() {
   return (
     <div className={classes.root}>
       <div className={classes.header}>
-        <h4>
-          My Course
-        </h4>
+        <h4>My Course</h4>
         <div>
-        <Button
+          <Button
             variant="contained"
             style={{ backgroundColor: "red", color: "white", marginRight: 20 }}
             onClick={() => {
-              history.goBack()
+              history.goBack();
             }}
           >
             Cancel
           </Button>
           <Button
-                variant="contained"
-                color="primary"
-                onClick={handleCreateCourse}
-              >
-                Continue
-              </Button>
+            variant="contained"
+            color="primary"
+            onClick={handleCreateCourse}
+          >
+            Continue
+          </Button>
         </div>
       </div>
       <Grid container spacing={0}>
