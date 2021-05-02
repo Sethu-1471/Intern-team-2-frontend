@@ -2,7 +2,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  overflow-x: scroll;
+  
 }
 
 /* logo images style */
@@ -218,7 +218,7 @@ label {
 }
 
 .input-group-prepend .input-group-text {
-  padding: 0.875rem 0.75rem;
+  padding: 0.7rem 0.75rem;
   color: #686868;
 }
 .border-right-0 {
@@ -239,9 +239,18 @@ label {
 }
 /* fornt awesome */
 
-.text-primary {
+.text-primary-color  {
   color: #392c70 !important;
 }
+a{
+
+    color: #392c70 !important;
+    cursor: pointer;
+    font-weight: 400;
+  
+}
+
+
 .far {
   font-family: Font awesome\5 Free;
 }
@@ -290,6 +299,11 @@ select {
 .auth .register-half-bg {
   background: url(../../Assets/register-bg.jpg);
   background-size: cover;
+}
+.btn-primary-color{
+  background-color: #392c70 !important;
+  border-color: #392c70 !important;
+  color: #ffffff !important;
 }
 
 /* right text */
