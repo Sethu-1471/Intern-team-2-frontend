@@ -56,7 +56,7 @@ function Login() {
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
                           <i
-                            className="fa fa-user text-primary"
+                            className="fa fa-user text-primary-color"
                             style={{
                               margin: "auto",
                               position: "relative",
@@ -79,7 +79,7 @@ function Login() {
                     <div className="input-group">
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
-                          <i className="fa fa-lock text-primary"></i>
+                          <i className="fa fa-lock text-primary-color"></i>
                         </span>
                       </div>
                       <input
@@ -104,7 +104,7 @@ function Login() {
                   </div>
                   <div className="my-3">
                     <a
-                      className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                      className="btn btn-block btn-primary-color btn-lg font-weight-medium auth-form-btn"
                       onClick={onSave}
                     >
                       <span>LOGIN</span>
@@ -126,7 +126,7 @@ function Login() {
                   </div>
                   <div className="text-center mt-4 font-weight-light">
                     Don't have an account?{" "}
-                    <a href="Register_Page.html" className="text-primary">
+                    <a onClick={() =>{history.push("/register")}} className="text-primary-color">
                       Create
                     </a>
                   </div>
