@@ -12,11 +12,17 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { Movie, Description, Assignment, Delete, Edit } from "@material-ui/icons";
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import IconButton from '@material-ui/core/IconButton';
+import {
+  Movie,
+  Description,
+  Assignment,
+  Delete,
+  Edit,
+} from "@material-ui/icons";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import IconButton from "@material-ui/core/IconButton";
 import { useHistory, useParams } from "react-router-dom";
-import { getVideo } from "../../api"
+import { getVideo } from "../../api";
 import { toast } from "react-toastify";
 
 const Accordion = withStyles({
@@ -70,7 +76,7 @@ export default function CustomizedAccordions(props) {
   const [expandedIndex, setExpandedIndex] = useState(
     props.content[0] ? props.content[0]._id : ""
   );
-  const history = useHistory()
+  const history = useHistory();
   const { id } = useParams();
   useEffect(() => {
     setContent(props.content);
@@ -114,27 +120,25 @@ export default function CustomizedAccordions(props) {
     }
   };
 
-  
   const documentDownload = (id, cId) => {
-    getVideo(id, cId, 2).then(res => {
+    getVideo(id, cId, 2).then((res) => {
       if (res.data.status) {
         toast("You tutorial document downloading...!!");
         console.log(res.data.video);
-        let uri = `${window.hostname}/docs/${res.data.video.file}`
+        let uri = `${window.hostname}/docs/${res.data.video.file}`;
         var link = document.createElement("a");
-    // If you don't know the name or want to use
-    // the webserver default set name = ''
-    link.setAttribute('download', "tutorial");
-    link.href = uri;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+        // If you don't know the name or want to use
+        // the webserver default set name = ''
+        link.setAttribute("download", "tutorial");
+        link.href = uri;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
       } else {
         toast.error(res.data.message);
       }
-    })
-  }
-
+    });
+  };
 
   return (
     <div>
@@ -160,15 +164,23 @@ export default function CustomizedAccordions(props) {
           <AccordionSummary aria-controls="panel1d-content">
             <Typography>
               {" "}
-              {con.name} #{i + 1},{" "}
-              <small> {con.content.length} part </small>{" "}
+              {con.name} #{i + 1}, <small> {con.content.length} part </small>{" "}
             </Typography>
           </AccordionSummary>
           <AccordionDetails id={`panel${i}-content`}>
             <div>
-              <List >
+              <List>
                 {con.content.map((i, j) => (
-                  <ListItem onClick={() => i.reference == "Video" ? history.push("/videoview/" + id + "/" +i.contentId) : i.reference == "Document" ? documentDownload(id, i.contentId) : null} button >
+                  <ListItem
+                    onClick={() =>
+                      i.reference == "Video"
+                        ? history.push("/videoview/" + id + "/" + i.contentId)
+                        : i.reference == "Document"
+                        ? documentDownload(id, i.contentId)
+                        : null
+                    }
+                    button
+                  >
                     <ListItemIcon>
                       {i.reference == "Video" ? (
                         <Movie />
@@ -180,17 +192,30 @@ export default function CustomizedAccordions(props) {
                     </ListItemIcon>
                     <ListItemText primary={`${i.contentName}`} />
                     <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="delete" onClick={() => {
-                        if(window.confirm("This delete will reflect for registered students also, continue to delete ?")){
-                          props.deleteContent(i.contentId, i.reference, i._id, expandedIndex)
+                      <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              "This delete will reflect for registered students also, continue to delete ?"
+                            )
+                          ) {
+                            props.deleteContent(
+                              i.contentId,
+                              i.reference,
+                              i._id,
+                              expandedIndex
+                            );
                           }
-                    }}>
-                      <Delete />
-                    </IconButton>
-                    {/* <IconButton edge="end" aria-label="delete" onClick={() => console.log("edit" + i._id + i.reference)}>
+                        }}
+                      >
+                        <Delete />
+                      </IconButton>
+                      {/* <IconButton edge="end" aria-label="delete" onClick={() => console.log("edit" + i._id + i.reference)}>
                       <Edit />
                     </IconButton> */}
-                  </ListItemSecondaryAction>
+                    </ListItemSecondaryAction>
                   </ListItem>
                 ))}
               </List>

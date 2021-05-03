@@ -11,8 +11,9 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Movie, Description, Assignment } from "@material-ui/icons";
 import { useHistory, useParams } from "react-router-dom";
-import { getVideo } from "../../../api"
+import { getVideo, submitAssignment,updateAssignment } from "../../../api";
 import { toast } from "react-toastify";
+import AssignmentSubmission from "./AssignmentSubmission";
 
 const Accordion = withStyles({
   root: {
@@ -59,13 +60,15 @@ const AccordionDetails = withStyles((theme) => ({
 export default function CustomizedAccordions(props) {
   const [expanded, setExpanded] = React.useState("panel0");
   const [content, setContent] = useState(props.content);
-  const [videoTutorialDialog, setVideoTutorialDialog] = useState(false);
-  const [documentTutorialDialog, setDocumentTutorialDialog] = useState(false);
-  const [assignmentDialog, setAssignmentDialog] = useState(false);
+  const [documentTutorialDialog, setDocumentDialog] = useState(false);
+  const [assignment, setAssignment] = useState({
+    name: "",
+  });
+  const [submittedAssignment, setSubmittedAssignment] = useState(null);
   const [expandedIndex, setExpandedIndex] = useState(
     props.content[0] ? props.content[0]._id : ""
   );
-  const history = useHistory()
+  const history = useHistory();
   const { id } = useParams();
 
   useEffect(() => {
@@ -77,28 +80,99 @@ export default function CustomizedAccordions(props) {
     setExpandedIndex(id);
   };
 
+  const getAssignment = (id, cid) => {
+    getVideo(id, cid, 3).then((res) => {
+      console.log(res.data);
+      if (res.data.done) {
+        setSubmittedAssignment(res.data.video);
+        setDocumentDialog(true);
+      } else {
+        if (res.data.status) {
+          setAssignment(res.data.video);
+          setDocumentDialog(true);
+        } else {
+          toast(res.data.message);
+        }
+      }
+    });
+  };
+
   const documentDownload = (id, cId) => {
-    getVideo(id, cId, 2).then(res => {
+    getVideo(id, cId, 2).then((res) => {
       if (res.data.status) {
         toast("You tutorial document downloading...!!");
         console.log(res.data.video);
-        let uri = `${window.hostname}/docs/${res.data.video.file}`
+        let uri = `${window.hostname}/docs/${res.data.video.file}`;
         var link = document.createElement("a");
-    // If you don't know the name or want to use
-    // the webserver default set name = ''
-    link.setAttribute('download', "tutorial");
-    link.href = uri;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+        // If you don't know the name or want to use
+        // the webserver default set name = ''
+        link.setAttribute("download", "tutorial");
+        link.href = uri;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
       } else {
         toast.error(res.data.message);
       }
+    });
+  };
+
+  const handleDialog = () => {
+    setDocumentDialog(false);
+    setSubmittedAssignment();
+    setAssignment({
+      name: ''
     })
-  }
-  
+  };
+
+  const handleSubmitAssignment = (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("course_id", id);
+    formData.append("assignment_id", assignment._id);
+
+    submitAssignment(formData).then((res) => {
+      if (res.data.status) {
+        toast(res.data.message);
+        setDocumentDialog(false);
+      } else {
+        toast(res.data.message);
+      }
+    });
+  };
+
+
+  const handleUpdateAssignment = (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("course_id", id);
+    formData.append("assignment_id", submittedAssignment._id);
+    let param = {
+      course_id: id,
+      assignment_id: submittedAssignment._id
+    }
+    
+    updateAssignment(formData, param).then((res) => {
+      if (res.data.status) {
+        toast(res.data.message);
+        setDocumentDialog(false);
+      } else {
+        toast(res.data.message);
+      }
+    });
+  };
+
+
   return (
     <div>
+      <AssignmentSubmission
+        handleShow={documentTutorialDialog}
+        handleDialog={handleDialog}
+        handleSubmit={handleSubmitAssignment}
+        submittedAssignment={submittedAssignment}
+        assignment={assignment}
+        handleUpdateAssignment={handleUpdateAssignment}
+      />
       {content.map((con, i) => (
         <Accordion
           square
@@ -109,15 +183,23 @@ export default function CustomizedAccordions(props) {
           <AccordionSummary aria-controls="panel1d-content">
             <Typography>
               {" "}
-              {con.name} #{i + 1},{" "}
-              <small> {con.content.length} part </small>{" "}
+              {con.name} #{i + 1}, <small> {con.content.length} part </small>{" "}
             </Typography>
           </AccordionSummary>
           <AccordionDetails id={`panel${i}-content`}>
             <div>
               <List dense={false}>
                 {con.content.map((i, j) => (
-                  <ListItem onClick={() => i.reference == "Video" ? history.push("/videoview/" + id + "/" +i.contentId) : i.reference == "Document" ? documentDownload(id, i.contentId) : null} button>
+                  <ListItem
+                    onClick={() =>
+                      i.reference == "Video"
+                        ? history.push("/videoview/" + id + "/" + i.contentId)
+                        : i.reference == "Document"
+                        ? documentDownload(id, i.contentId)
+                        : getAssignment(id, i.contentId)
+                    }
+                    button
+                  >
                     <ListItemIcon>
                       {i.reference == "Video" ? (
                         <Movie />

@@ -7,7 +7,12 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { getCourseByUserId, getAllPublicCourse,deleteCourse, getUser } from "../../api";
+import {
+  getCourseByUserId,
+  getAllPublicCourse,
+  deleteCourse,
+  getUser,
+} from "../../api";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 
@@ -51,16 +56,16 @@ function CourseCard({ content, admin, deleteCourseHandle, user }) {
           </Typography>
         </CardContent>
       </CardActionArea>
-        <CardActions>
-          <Button
-            size="small"
-            variant="contained"
-            color="primary"
-              onClick={() => history.push("/course/" + content._id)}
-          >
-            Go to course
-          </Button>
-        </CardActions>
+      <CardActions>
+        <Button
+          size="small"
+          variant="contained"
+          color="primary"
+          onClick={() => history.push("/course/" + content._id)}
+        >
+          Go to course
+        </Button>
+      </CardActions>
     </Card>
   );
 }
@@ -94,22 +99,22 @@ export default function CoursesList() {
         }
       });
     }
-  }
+  };
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user")));
     getCourse();
   }, []);
 
-  const deleteCourseHandle = async(id) => {
-    deleteCourse(id).then(res => {
+  const deleteCourseHandle = async (id) => {
+    deleteCourse(id).then((res) => {
       if (res.data.status) {
         toast(res.data.message);
         getCourse();
       } else {
         toast.error(res.data.message);
       }
-    })
-  }
+    });
+  };
 
   return (
     <div>
@@ -126,25 +131,27 @@ export default function CoursesList() {
 
       {courses[0] ? (
         <div className="row m-0">
-                  {courses.map((d, i) => {
-                      if (d.userEnrolled.find(o => o.user === user._id)) {
-                          return (
-                            <div
-                            key={i}
-                            className="col-12 col-md-4 mt-5 d-flex justify-content-center"
-                          >
-                            <CourseCard content={d} admin={admin} user={user} deleteCourseHandle={deleteCourseHandle} />
-                         </div>
-                          )
-                      }
-                  })}
+          {courses.map((d, i) => {
+            if (d.userEnrolled.find((o) => o.user === user._id)) {
+              return (
+                <div
+                  key={i}
+                  className="col-12 col-md-4 mt-5 d-flex justify-content-center"
+                >
+                  <CourseCard
+                    content={d}
+                    admin={admin}
+                    user={user}
+                    deleteCourseHandle={deleteCourseHandle}
+                  />
+                </div>
+              );
+            }
+          })}
         </div>
       ) : (
         <div style={{ margin: "20px 20px" }}>
-          <h4>
-            You not regsitered for any course
-          </h4>
-         
+          <h4>You not regsitered for any course</h4>
         </div>
       )}
     </div>

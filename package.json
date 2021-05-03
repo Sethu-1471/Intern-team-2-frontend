@@ -30,7 +30,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && mv build ../backend-intern/ || move build ../backend-intern/",
+    "build": "react-scripts build && mv build ../client/ || move build ../client/",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write . && prettier --check ."

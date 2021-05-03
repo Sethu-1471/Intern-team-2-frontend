@@ -6,11 +6,12 @@ import CourseAddMainPage from "./components/CourseCreate/MainPageOne";
 import CourseEditSubPage from "./components/CourseCreate/MainPageTwo";
 import CourseList from "./components/CoursesHome/CoursesList";
 import Coursedetail from "./components/Student/CourseStudy/Coursedetail";
-import VideoView from "./components/ModuleContentView/VideoView"
-import MyCourse from "./components/Student/MyCourse"
+import VideoView from "./components/ModuleContentView/VideoView";
+import MyCourse from "./components/Student/MyCourse";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header/Header";
+import Landing from "./components/Landing/Landing";
 import ProfilePage from "./components/Profile/ProfilePage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useLocation } from "react-router-dom";
@@ -27,6 +28,7 @@ function App() {
       <ToastContainer />
       {list.includes(location.pathname.split("/")[1]) ? null : <Header />}
       <Switch>
+        <ProtectedRoute path="/" exact component={Landing} />
         {/* <ProtectedRoute path="/" exact component={login}/> */}
         <ProtectedRoute path="/register" exact component={register} />
         <ProtectedRoute path="/login" exact component={login} />
@@ -37,9 +39,10 @@ function App() {
           path={`/editsubcontent/:id`}
           component={CourseEditSubPage}
         />
+        <ProtectedRoute path={`/course/:id`} component={Coursedetail} />
         <ProtectedRoute
-          path={`/course/:id`}
-          component={Coursedetail}
+          path={`/editcourse/:id`}
+          component={CourseAddMainPage}
         />
         <ProtectedRoute
           path={`/payment/:id`}
