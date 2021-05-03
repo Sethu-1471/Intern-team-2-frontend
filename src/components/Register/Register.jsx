@@ -98,7 +98,7 @@ function Register() {
                     <div className="input-group">
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
-                          <i className=" fa fa-user text-primary"></i>
+                          <i className=" fa fa-user text-primary-color"></i>
                           <FontAwesomeIcon icon="user" />
                         </span>
                       </div>
@@ -117,7 +117,8 @@ function Register() {
                     <div className="input-group">
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
-                          <i className="far fa-phone text-primary"></i>
+                          <i className="fa fa-phone text-primary-color"></i>
+                         
                         </span>
                       </div>
                       <input
@@ -136,7 +137,7 @@ function Register() {
                     <div className="input-group">
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
-                          <i className="far fa-envelope-open text-primary"></i>
+                          <i className="fa fa-envelope-open text-primary-color"></i>
                         </span>
                       </div>
                       <input
@@ -153,7 +154,8 @@ function Register() {
                     <div className="input-group">
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
-                          <i className="far fa-calendar text-primary"></i>
+                          <i className="fa fa-birthday-cake text-primary-color"></i>
+                       
                         </span>
                       </div>
                       <input
@@ -186,7 +188,7 @@ function Register() {
                     <div className="input-group">
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
-                          <i className="fa fa-lock text-primary"></i>
+                          <i className="fa fa-lock text-primary-color"></i>
                         </span>
                       </div>
                       <input
@@ -240,7 +242,7 @@ function Register() {
                     <div className="input-group">
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
-                          <i className="fa fa-lock text-primary"></i>
+                          <i className="fa fa-lock text-primary-color"></i>
                         </span>
                       </div>
                       <input
@@ -256,7 +258,7 @@ function Register() {
 
                   <div className="mt-3">
                     <a
-                      className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                      className="btn btn-block btn-primary-color btn-lg font-weight-medium auth-form-btn"
                       href="#"
                       onClick={disabled ? onSave : sendOtp}
                     >
@@ -265,7 +267,7 @@ function Register() {
                   </div>
                   <div className="text-center mt-4 font-weight-light">
                     Already have an account?{" "}
-                    <a href="Login_Page.html" className="text-primary">
+                    <a onClick={()=>{history.push("/login")}} className="text-primary-color">
                       Login
                     </a>
                   </div>

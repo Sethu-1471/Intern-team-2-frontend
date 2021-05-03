@@ -9,8 +9,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 window.hostname = "http://localhost:3400";
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
-  document.getElementById("root")
+    <Router>
+        <App />
+    </Router>,
+    document.getElementById("root")
 );

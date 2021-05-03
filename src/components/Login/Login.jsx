@@ -56,7 +56,7 @@ function Login() {
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
                           <i
-                            className="fa fa-user text-primary"
+                            className="fa fa-user text-primary-color"
                             style={{
                               margin: "auto",
                               position: "relative",
@@ -79,7 +79,7 @@ function Login() {
                     <div className="input-group">
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
-                          <i className="fa fa-lock text-primary"></i>
+                          <i className="fa fa-lock text-primary-color"></i>
                         </span>
                       </div>
                       <input
@@ -104,19 +104,21 @@ function Login() {
                   </div>
                   <div className="my-3">
                     <a
-                      className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                      className="btn btn-block btn-primary-color btn-lg font-weight-medium auth-form-btn"
                       onClick={onSave}
                     >
                       <span>LOGIN</span>
                     </a>
                   </div>
                   <div className="mb-2 d-flex">
+                    
                     <button
                       type="button"
-                      className="btn btn-facebook auth-form-btn flex-grow mr-1"
+                      className="btn btn-facebook  auth-form-btn flex-grow mr-1" 
                     >
                       <i className="fab fa-facebook-f mr-2"></i>Facebook
                     </button>
+                    
                     <button
                       type="button"
                       className="btn btn-google auth-form-btn flex-grow ml-1"
@@ -126,7 +128,7 @@ function Login() {
                   </div>
                   <div className="text-center mt-4 font-weight-light">
                     Don't have an account?{" "}
-                    <a href="Register_Page.html" className="text-primary">
+                    <a onClick={() =>{history.push("/register")}} className="text-primary-color">
                       Create
                     </a>
                   </div>

@@ -155,6 +155,13 @@ export default function CoursesList() {
     <div>
       <div className={classes.header}>
         <h4>{admin ? "My Course" : "Course for you..!"}</h4>
+        {admin && <Button
+          variant="contained"
+          color="primary"
+          onClick={() => history.push("/admin/dashboard")}
+        >
+          Dashboard
+        </Button>}
         <Button
           variant="contained"
           color="primary"

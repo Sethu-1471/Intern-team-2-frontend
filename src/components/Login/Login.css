@@ -44,10 +44,7 @@
 .auth .login-half-bg {
   background: url(../../Assets/login-bg.jpg);
   background-size: cover;
-}
-.auth .register-half-bg {
-  background: url(../../Assets/register-bg.jpg);
-  background-size: cover;
+  padding-top: 15px;
 }
 
 .auth.auth-img-bg {
@@ -155,8 +152,24 @@
   border-right: 0 !important;
 }
 
-.text-primary {
+.text-primary-color  {
   color: #392c70 !important;
+ 
+}
+
+input{
+  outline:none !important;
+
+}
+input:focus{
+  outline:none !important;
+ box-shadow:none !important;
+border:none;
+
+}
+a{
+  color: #392c70 !important;
+  font-weight: 400;
 }
 
 .my-2 {
@@ -198,7 +211,6 @@
 .form-check .form-check-label {
   min-height: 18px;
   display: block;
-  margin-left: 1.75rem;
   font-size: 0.8125rem;
   line-height: 1.5;
 }
@@ -254,26 +266,26 @@ a {
   padding: 0.875rem 2rem;
   border-radius: 0.1875rem;
 }
-.btn-primary {
-  background-color: #392c70;
-  border-color: #392c70;
+.btn-primary-color {
+  background-color: #392c70 !important;
+  border-color: #392c70 !important;
+  color: #ffffff !important;
 }
 
-.btn {
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  user-select: none;
-  border: 1px solid transparent;
-}
 .btn-google {
-  background: #dc4a38;
-  color: #ffffff;
+  background: #dc4a38 !important;
+  color: #ffffff !important;
+}
+.btn-facebook {
+  background: 	#4267B2 !important;
+  color: #ffffff !important;
 }
 
 .btn i {
   font-size: 1rem;
 }
+
+
 .mr-2 {
   margin-right: 0.5rem !important;
 }

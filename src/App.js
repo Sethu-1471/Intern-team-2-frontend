@@ -1,5 +1,6 @@
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
+import Chatbot from "./components/Chatbot/chat";
 import register from "./components/Register/Register";
 import login from "./components/Login/Login.jsx";
 import CourseAddMainPage from "./components/CourseCreate/MainPageOne";
@@ -18,6 +19,8 @@ import { useLocation } from "react-router-dom";
 
 //student
 import StudentPaymentEnroll from "./components/Student/PaymentEnroll";
+import AdminPage from "./components/AdminPage/AdminPage";
+
 
 function App() {
   const location = useLocation();
@@ -29,6 +32,7 @@ function App() {
       {list.includes(location.pathname.split("/")[1]) ? null : <Header />}
       <Switch>
         <ProtectedRoute path="/" exact component={Landing} />
+           
         {/* <ProtectedRoute path="/" exact component={login}/> */}
         <ProtectedRoute path="/register" exact component={register} />
         <ProtectedRoute path="/login" exact component={login} />
@@ -51,7 +55,10 @@ function App() {
         <ProtectedRoute path={"/profile"} component={ProfilePage} />
         <ProtectedRoute path={"/mycourse"} component={MyCourse} />
         <ProtectedRoute path={"/videoview/:cid/:mcid"} component={VideoView} />
+        <ProtectedRoute path={"/admin/dashboard"} exact component={AdminPage} />
         <Route path="*" component={() => "404 Not Found"} />
+
+        <Chatbot/>
       </Switch>
     </>
   );
