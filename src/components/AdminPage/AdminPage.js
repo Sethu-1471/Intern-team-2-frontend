@@ -8,6 +8,7 @@ import UsersTable from "./UsersTable/UsersTable";
 const AdminPage = () => {
     return (
         <div className="admin-container py-4">
+            <StatisticsSection />
             <UsersTable />
         </div>
     );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -153,84 +153,90 @@ export default function UsersTable() {
     };
 
     return (
-        <TableContainer
-            component={Paper}
-            style={{ width: "90%", margin: "auto" }}
-        >
-            <Table
-                className={classes.table}
-                aria-label="custom pagination table"
-            >
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell>Course Name</StyledTableCell>
-                        <StyledTableCell align="right">
-                            Student Name
-                        </StyledTableCell>
-                        <StyledTableCell align="right">Email</StyledTableCell>
-                        <StyledTableCell align="right">
-                            Contact No
-                        </StyledTableCell>
-                        <StyledTableCell align="right">Country</StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {(rowsPerPage > 0
-                        ? usersDetail.slice(
-                              page * rowsPerPage,
-                              page * rowsPerPage + rowsPerPage
-                          )
-                        : usersDetail
-                    ).map((row) => (
-                        <TableRow key={row.name}>
-                            <TableCell component="th" scope="row">
-                                <h6>{row.courseName}</h6>
-                            </TableCell>
-                            <TableCell style={{ width: 160 }} align="right">
-                                {row.userDetail.name}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }} align="right">
-                                {row.userDetail.email}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }} align="right">
-                                {row.userDetail.contactNo}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }} align="right">
-                                {row.userDetail.country}
-                            </TableCell>
+        <div style={{ width: "90%", margin: "auto" }}>
+            <h4>Enrolled Students</h4>
+            <TableContainer component={Paper}>
+                <Table
+                    className={classes.table}
+                    aria-label="custom pagination table"
+                >
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>Course Name</StyledTableCell>
+                            <StyledTableCell align="right">
+                                Student Name
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
+                                Email
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
+                                Contact No
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
+                                Country
+                            </StyledTableCell>
                         </TableRow>
-                    ))}
+                    </TableHead>
+                    <TableBody>
+                        {(rowsPerPage > 0
+                            ? usersDetail.slice(
+                                  page * rowsPerPage,
+                                  page * rowsPerPage + rowsPerPage
+                              )
+                            : usersDetail
+                        ).map((row) => (
+                            <TableRow key={row.name}>
+                                <TableCell component="th" scope="row">
+                                    <h6>{row.courseName}</h6>
+                                </TableCell>
+                                <TableCell style={{ width: 160 }} align="right">
+                                    {row.userDetail.name}
+                                </TableCell>
+                                <TableCell style={{ width: 160 }} align="right">
+                                    {row.userDetail.email}
+                                </TableCell>
+                                <TableCell style={{ width: 160 }} align="right">
+                                    {row.userDetail.contactNo}
+                                </TableCell>
+                                <TableCell style={{ width: 160 }} align="right">
+                                    {row.userDetail.country}
+                                </TableCell>
+                            </TableRow>
+                        ))}
 
-                    {emptyRows > 0 && (
-                        <TableRow style={{ height: 53 * emptyRows }}>
-                            <TableCell colSpan={6} />
+                        {emptyRows > 0 && (
+                            <TableRow style={{ height: 53 * emptyRows }}>
+                                <TableCell colSpan={6} />
+                            </TableRow>
+                        )}
+                    </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                            <TablePagination
+                                rowsPerPageOptions={[
+                                    5,
+                                    10,
+                                    25,
+                                    { label: "All", value: -1 },
+                                ]}
+                                colSpan={3}
+                                count={usersDetail.length}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                SelectProps={{
+                                    inputProps: {
+                                        "aria-label": "rows per page",
+                                    },
+                                    native: true,
+                                }}
+                                onChangePage={handleChangePage}
+                                onChangeRowsPerPage={handleChangeRowsPerPage}
+                                ActionsComponent={TablePaginationActions}
+                            />
                         </TableRow>
-                    )}
-                </TableBody>
-                <TableFooter>
-                    <TableRow>
-                        <TablePagination
-                            rowsPerPageOptions={[
-                                5,
-                                10,
-                                25,
-                                { label: "All", value: -1 },
-                            ]}
-                            colSpan={3}
-                            count={usersDetail.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            SelectProps={{
-                                inputProps: { "aria-label": "rows per page" },
-                                native: true,
-                            }}
-                            onChangePage={handleChangePage}
-                            onChangeRowsPerPage={handleChangeRowsPerPage}
-                            ActionsComponent={TablePaginationActions}
-                        />
-                    </TableRow>
-                </TableFooter>
-            </Table>
-        </TableContainer>
+                    </TableFooter>
+                </Table>
+            </TableContainer>
+        </div>
     );
 }
