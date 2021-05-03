@@ -5,18 +5,13 @@ import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import VideoTutorialDialog from "./VideoDialogBox.jsx";
-import DocumentTutorialDialog from "./DocumentDialogBox";
-import AssignmentDialog from "./AssignmentDialogBox";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { Movie, Description, Assignment, Delete, Edit } from "@material-ui/icons";
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import IconButton from '@material-ui/core/IconButton';
+import { Movie, Description, Assignment } from "@material-ui/icons";
 import { useHistory, useParams } from "react-router-dom";
-import { getVideo } from "../../api"
+import { getVideo } from "../../../api"
 import { toast } from "react-toastify";
 
 const Accordion = withStyles({
@@ -72,6 +67,7 @@ export default function CustomizedAccordions(props) {
   );
   const history = useHistory()
   const { id } = useParams();
+
   useEffect(() => {
     setContent(props.content);
   }, [props.content]);
@@ -81,40 +77,6 @@ export default function CustomizedAccordions(props) {
     setExpandedIndex(id);
   };
 
-  const videoTutorialDialoghandle = () => {
-    setVideoTutorialDialog(true);
-  };
-  const documentTutorialDialoghandle = () => {
-    setDocumentTutorialDialog(true);
-  };
-
-  const AssignmentDialogHandle = () => {
-    setAssignmentDialog(true);
-  };
-
-  const handleDialog = (e = false, payload, identification) => {
-    if (e) {
-      if (identification === 1) {
-        //Response Video Dialog
-        props.uploadVideoTutorial(payload, expandedIndex);
-        setVideoTutorialDialog(false);
-      } else if (identification === 2) {
-        //Response Document Dialog
-        props.uploadDocsTutorial(payload, expandedIndex);
-        setDocumentTutorialDialog(false);
-      } else if (identification === 3) {
-        //Response Assignment Dialog
-        props.uploadAssignment(payload, expandedIndex);
-        setAssignmentDialog(false);
-      }
-    } else {
-      setVideoTutorialDialog(false);
-      setDocumentTutorialDialog(false);
-      setAssignmentDialog(false);
-    }
-  };
-
-  
   const documentDownload = (id, cId) => {
     getVideo(id, cId, 2).then(res => {
       if (res.data.status) {
@@ -134,22 +96,9 @@ export default function CustomizedAccordions(props) {
       }
     })
   }
-
-
+  
   return (
     <div>
-      <VideoTutorialDialog
-        handleShow={videoTutorialDialog}
-        handleDialog={handleDialog}
-      />
-      <DocumentTutorialDialog
-        handleShow={documentTutorialDialog}
-        handleDialog={handleDialog}
-      />
-      <AssignmentDialog
-        handleShow={assignmentDialog}
-        handleDialog={handleDialog}
-      />
       {content.map((con, i) => (
         <Accordion
           square
@@ -166,9 +115,9 @@ export default function CustomizedAccordions(props) {
           </AccordionSummary>
           <AccordionDetails id={`panel${i}-content`}>
             <div>
-              <List >
+              <List dense={false}>
                 {con.content.map((i, j) => (
-                  <ListItem onClick={() => i.reference == "Video" ? history.push("/videoview/" + id + "/" +i.contentId) : i.reference == "Document" ? documentDownload(id, i.contentId) : null} button >
+                  <ListItem onClick={() => i.reference == "Video" ? history.push("/videoview/" + id + "/" +i.contentId) : i.reference == "Document" ? documentDownload(id, i.contentId) : null} button>
                     <ListItemIcon>
                       {i.reference == "Video" ? (
                         <Movie />
@@ -179,46 +128,9 @@ export default function CustomizedAccordions(props) {
                       )}
                     </ListItemIcon>
                     <ListItemText primary={`${i.contentName}`} />
-                    <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="delete" onClick={() => {
-                        if(window.confirm("This delete will reflect for registered students also, continue to delete ?")){
-                          props.deleteContent(i.contentId, i.reference, i._id, expandedIndex)
-                          }
-                    }}>
-                      <Delete />
-                    </IconButton>
-                    {/* <IconButton edge="end" aria-label="delete" onClick={() => console.log("edit" + i._id + i.reference)}>
-                      <Edit />
-                    </IconButton> */}
-                  </ListItemSecondaryAction>
                   </ListItem>
                 ))}
               </List>
-              <Button
-                variant="contained"
-                size="small"
-                color="primary"
-                onClick={videoTutorialDialoghandle}
-              >
-                Add Video
-              </Button>
-              <Button
-                variant="contained"
-                size="small"
-                color="primary"
-                style={{ margin: "0 5px" }}
-                onClick={documentTutorialDialoghandle}
-              >
-                Add Document
-              </Button>
-              <Button
-                variant="contained"
-                size="small"
-                color="primary"
-                onClick={AssignmentDialogHandle}
-              >
-                Add Assignment
-              </Button>
             </div>
           </AccordionDetails>
         </Accordion>
