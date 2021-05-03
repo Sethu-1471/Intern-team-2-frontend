@@ -18,6 +18,7 @@ import { useLocation } from "react-router-dom";
 
 //student
 import StudentPaymentEnroll from "./components/Student/PaymentEnroll";
+import AdminPage from "./components/AdminPage/AdminPage";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
         <ProtectedRoute path={"/profile"} component={ProfilePage} />
         <ProtectedRoute path={"/mycourse"} component={MyCourse} />
         <ProtectedRoute path={"/videoview/:cid/:mcid"} component={VideoView} />
+        <ProtectedRoute path={"/admin/dashboard"} exact component={AdminPage} />
         <Route path="*" component={() => "404 Not Found"} />
 
         <Chatbot/>

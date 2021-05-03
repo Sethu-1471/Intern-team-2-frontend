@@ -3,13 +3,12 @@ import StatisticsSection from "./StatisticsSection/StatisticsSection";
 
 import "./Admin.css";
 import StudentsSubmission from "./StudentsSubmission/StudentsSubmission";
+import UsersTable from "./UsersTable/UsersTable";
 
 const AdminPage = () => {
     return (
         <div className="admin-container py-4">
-            <StatisticsSection />
-            <StudentsSubmission />
-            <ActionsContainer />
+            <UsersTable />
         </div>
     );
 };
