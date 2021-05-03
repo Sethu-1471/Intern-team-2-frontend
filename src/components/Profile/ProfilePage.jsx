@@ -7,13 +7,16 @@ import {
   TableRow,
   Button,
 } from "@material-ui/core";
-
+import Dialog from "./ChangePassword"
 import "./ProfilePage.css";
 import { useHistory } from "react-router";
+import { changePassword } from "../../api";
+import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   const history = useHistory();
   const [detail, setDetail] = useState([]);
+  const [dialog, setDialog] = useState(false);
 
   useEffect(() => {
     getUserDetail();
@@ -49,7 +52,24 @@ const ProfilePage = () => {
     setDetail(tableList);
   };
 
+  const handleDialog = (payload) => {
+    if (payload) {
+      changePassword(payload).then(res => {
+        if (res.data.status) {
+          toast(res.data.message);
+          setDialog(false); 
+        } else {
+          toast.error(res.data.message);
+        }
+      })
+    } else {
+      setDialog(false); 
+    }
+  };
+
   return (
+    <div>
+      <Dialog handleDialog={handleDialog} handleShow={dialog} />
     <div className="profile-container">
       <div className="profile-picture">
         <i className="fas fa-user-circle"></i>
@@ -66,10 +86,11 @@ const ProfilePage = () => {
           </TableRow>
         ))}
       </TableBody>
-      <Button variant="contained" color="primary" style={{ marginTop: 20 }}>
+      <Button variant="contained" onClick={() => setDialog(true)} color="primary" style={{ marginTop: 20 }}>
         Change Password
       </Button>
-    </div>
+      </div>
+      </div>
   );
 };
 

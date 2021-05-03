@@ -27,10 +27,14 @@ export const register = (payload) => api.post(`/auth/register`, payload);
 export const login = (payload) => api.post(`/auth/login`, payload);
 export const sendOTP = (payload) => api.post(`/auth/otp`, payload);
 export const getUser = () => api.get(`/auth/getuser`);
+export const changePassword = (payload) => api.put(`auth/changepassword`, payload);
 
 //Course
 export const createCourse = (payload) =>
   api.post(`/course/createcourse`, payload);
+
+export const submitAssignment = (payload) =>
+  api.post(`/course/submitassignment`, payload);
 
 //Get All public course
 export const getAllPublicCourse = (id) => api.get(`/course/getallpubliccourse`);
@@ -39,39 +43,51 @@ export const getAllPublicCourse = (id) => api.get(`/course/getallpubliccourse`);
 export const getCoursebyId = (id, auth) =>
   api.get(`/course/getcoursebyid`, {
     params: {
-      course_id: id
+      course_id: id,
     },
   });
 
-  
+// /Update Course
+export const updateCourse = (payload, params) =>
+  api.put(`/course/updatecourse`, payload, {
+    params: params,
+  });
+
+  // /Update Assignment
+export const updateAssignment = (payload, params) =>
+  api.put(`/course/updateassignment`, payload, {
+  params
+});
+
 //Getting all tutorial items
 export const getVideo = (id, vid, type) =>
   api.get(`/course/getvideo`, {
     params: {
       course_id: id,
       video_id: vid,
-      type: type
+      type: type,
     },
   });
-    
 
 export const getStudentEnrollCourseWithId = (id) =>
   api.get(`/course/getstudentenrollcoursebyid`, {
     params: {
-      course_id: id
+      course_id: id,
     },
   });
 
- //delete Module Content
- export const deleteSubModule = (params) => api.delete(`/course/deletesubmodule`, {
-  params: params
- });
+//delete Module Content
+export const deleteSubModule = (params) =>
+  api.delete(`/course/deletesubmodule`, {
+    params: params,
+  });
 
-export const deleteCourse = (id) => api.delete(`/course/deletecourse`, {
-  params: {
-     course_id: id
-   }
- })
+export const deleteCourse = (id) =>
+  api.delete(`/course/deletecourse`, {
+    params: {
+      course_id: id,
+    },
+  });
 
 //Get Course By Teacher user id
 export const getCourseByUserId = () => api.get(`/course/getcoursebyuserid`);
@@ -119,5 +135,12 @@ const apis = {
   uploadVideoTutorial,
   EnrollCourse,
   sendOTP,
+  submitAssignment,
+  updateCourse,
+  changePassword
 };
 export default apis;
+
+// orginalImage
+// course_id
+// body la comtemt

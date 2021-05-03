@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getCoursebyId } from "../../api";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "@material-ui/core/Button";
 import SubModule from "./SubModules";
@@ -11,11 +11,12 @@ import {
   uploadVideoTutorial,
   uploadDocsTutorial,
   uploadAssignment,
-  deleteSubModule
+  deleteSubModule,
 } from "../../api";
 import "./splitpane.css";
 
 export default function MainPageTwo() {
+  const history = useHistory();
   let { id } = useParams();
   const [course, setCourse] = useState();
   const [dialogShow, setDialogShow] = useState(false);
@@ -100,15 +101,15 @@ export default function MainPageTwo() {
       } else if (ref === "Assignment") {
         return 3;
       }
-    }
+    };
     let params = {
       content_id: cId,
       type: typeFind(Ref),
       course_id: id,
       module_id: mId,
-      moduleContentId: mcId
-    }
-    deleteSubModule(params).then(res => {
+      moduleContentId: mcId,
+    };
+    deleteSubModule(params).then((res) => {
       if (res.data.status) {
         toast(res.data.message);
         setCourse(res.data.course);
@@ -116,8 +117,8 @@ export default function MainPageTwo() {
       } else {
         toast.error(res.data.message);
       }
-    })
-  }
+    });
+  };
 
   if (!course) return null;
   return (
@@ -144,6 +145,21 @@ export default function MainPageTwo() {
           <p>Registration - {course.registration ? "Free" : "Paid"}</p>
           <p>Rating - {course.rating}/10</p>
           <p>Total registered Students: {course.userEnrolled.length} </p>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => history.push("/editcourse/" + id)}
+            style={{ margin: "0 20px" }}
+          >
+            Edit Course Details
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setDialogShow(true)}
+          >
+            Overview
+          </Button>
         </div>
         <div>
           {course.subModule[0] ? (

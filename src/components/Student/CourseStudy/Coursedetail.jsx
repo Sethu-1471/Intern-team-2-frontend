@@ -28,7 +28,6 @@ export default function MainPageTwo() {
     setModulename(e);
   };
 
-
   if (!course) return null;
   return (
     <div>
@@ -43,7 +42,10 @@ export default function MainPageTwo() {
           <h4> {course.name} </h4>
           <p>Description - {course.description} </p>
           <p>
-            Certificate - {course.certificate ? "Download Certificate after completion of course" : "Not Available"}
+            Certificate -{" "}
+            {course.certificate
+              ? "Download Certificate after completion of course"
+              : "Not Available"}
           </p>
           <p>Instructor - {course.staffId.name} </p>
           <p>Instructor email id - {course.staffId.email} </p>
@@ -51,9 +53,7 @@ export default function MainPageTwo() {
         </div>
         <div>
           {course.subModule[0] ? (
-            <SubModule
-              content={course.subModule}
-            />
+            <SubModule content={course.subModule} />
           ) : (
             <div style={{ padding: "20px 20px" }}>
               <h5>No Sub Module Available</h5>
