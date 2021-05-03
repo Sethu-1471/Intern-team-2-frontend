@@ -1,0 +1,30 @@
+:root {
+    --mat-blue: #3f51b5;
+} 
+.card-container {
+    box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    background-color: var(--mat-blue);
+    color: #fff;
+}
+
+.rounded-icon-sm {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+p {
+    margin: 0 !important;
+}
+
+.admin-container {
+    height: 100%;
+}
