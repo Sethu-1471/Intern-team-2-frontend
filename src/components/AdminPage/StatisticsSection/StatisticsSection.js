@@ -37,7 +37,7 @@ const StatisticsSection = () => {
                 <div className="d-flex justify-content-between align-items-center">
                     <div>
                         <h5>Total Courses</h5>
-                        <h3>{statistics["totalCourses"]}</h3>
+                        <span style={{fontSize: "2rem"}}>{statistics["totalCourses"]}</span>
                     </div>
                     <div
                         className="round-icon"
@@ -51,7 +51,7 @@ const StatisticsSection = () => {
                 <div className="d-flex justify-content-between align-items-center">
                     <div>
                         <h5>Active Courses</h5>
-                        <h3>{statistics["availableCourses"]}</h3>
+                        <span style={{fontSize: "2rem"}}>{statistics["availableCourses"]}</span>
                     </div>
                     <div
                         className="round-icon"
@@ -65,7 +65,7 @@ const StatisticsSection = () => {
                 <div className="d-flex justify-content-between align-items-center">
                     <div>
                         <h5>Registered Students</h5>
-                        <h3>{statistics["registeredStudents"]}</h3>
+                        <span style={{fontSize: "2rem"}}>{statistics["registeredStudents"]}</span>
                     </div>
                     <div
                         className="round-icon"
