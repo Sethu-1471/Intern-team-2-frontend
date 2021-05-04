@@ -28,9 +28,7 @@ import { useState } from "react";
 function App() {
   const location = useLocation();
   console.log(location.pathname.split("/")[1]);
-  const [load, setload] = useAxiosLoader();
-  const startLoad = () =>{ setload(true) }
-  const stopLoad = () =>{ setload(false) }
+  const [load] = useAxiosLoader();
   const list = ["login", "register", "/", "payment", ""];
   return (
     <>
