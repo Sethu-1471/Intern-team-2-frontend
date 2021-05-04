@@ -17,6 +17,7 @@ import LastPageIcon from "@material-ui/icons/LastPage";
 import { HttpRequest } from "../../../api/HttpRequest";
 import { TableHead } from "@material-ui/core";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router";
 
 const useStyles1 = makeStyles((theme) => ({
     root: {
@@ -121,9 +122,10 @@ const useStyles2 = makeStyles({
 
 export default function UsersTable() {
     const classes = useStyles2();
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
     const [usersDetail, setUsersDetail] = useState([]);
+    const history = useHistory();
 
     const emptyRows =
         rowsPerPage -
@@ -138,10 +140,8 @@ export default function UsersTable() {
             method: "GET",
             path: "/admin/enrolled-users",
         });
-        console.log({ response });
         if (response.status === true) return setUsersDetail(response["data"]);
-
-        toast.error(response.message);
+        toast.error(response.message)
     };
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -153,8 +153,8 @@ export default function UsersTable() {
     };
 
     return (
-        <div style={{ width: "90%", margin: "auto" }}>
-            <h4>Enrolled Students</h4>
+        <div style={{ width: "90%", margin: "2rem auto", textAlign: "center" }}>
+            <h4>Registered Students</h4>
             <TableContainer component={Paper}>
                 <Table
                     className={classes.table}
@@ -185,7 +185,7 @@ export default function UsersTable() {
                               )
                             : usersDetail
                         ).map((row) => (
-                            <TableRow key={row.name}>
+                            <TableRow key={row.courseName}>
                                 <TableCell component="th" scope="row">
                                     <h6>{row.courseName}</h6>
                                 </TableCell>

@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 import { HttpRequest } from "../../../api/HttpRequest";
 
 import "./StatisticsSection.css";
 
 const StatisticsSection = () => {
+    const history = useHistory();
     const [statistics, setStatistics] = useState({
         total_students: 0,
         registered_students: 0,
@@ -20,7 +23,12 @@ const StatisticsSection = () => {
             method: "GET",
         };
         const response = await HttpRequest(requestObj);
-        if (response.status === true) setStatistics(response["data"]);
+        if (response.status === true) return setStatistics(response["data"]);
+        if (response.status_code === 401 || response.status_code === 403) {
+            localStorage.clear()
+            history.push("/login")
+            toast.error("Token expired login again")
+        };
     };
 
     return (
@@ -42,7 +50,7 @@ const StatisticsSection = () => {
             <div className="card-container container-fluid p-4">
                 <div className="d-flex justify-content-between align-items-center">
                     <div>
-                        <h5>Available Courses</h5>
+                        <h5>Active Courses</h5>
                         <h3>{statistics["availableCourses"]}</h3>
                     </div>
                     <div

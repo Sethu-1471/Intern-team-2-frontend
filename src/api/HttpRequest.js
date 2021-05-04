@@ -9,6 +9,7 @@ axios.interceptors.request.use(function (config) {
     return config;
 });
 
+
 const HttpRequest = async ({path, body, query, headers = {"Content-Type": "application/json"}, method}) => {
     try {
         const response = await axios.request({
@@ -18,11 +19,12 @@ const HttpRequest = async ({path, body, query, headers = {"Content-Type": "appli
             headers: headers
         })
         const responseData = response["data"];
-        console.log("HTTP REQUEST",response);
         return responseData       
     } catch (error) {
-        console.log(error?.response?.data);
-        return error?.response?.data ?? { "status": false, "message": error["message"] || "Internal Server Error, Please try again", "status_code": error["status_code"] || 500 }
+
+        if(error?.response?.data instanceof Object) return error?.response?.data;
+
+        return { "status": false, "message": error["message"], "status_code": error?.response?.status || 500 }
     }
 } 
 
