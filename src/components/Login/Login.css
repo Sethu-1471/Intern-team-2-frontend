@@ -164,7 +164,8 @@ input{
 input:focus{
   outline:none !important;
  box-shadow:none !important;
-border:none;
+ border-color: #ced4da !important;
+
 
 }
 a{

@@ -116,7 +116,7 @@ function Login() {
                       type="button"
                       className="btn btn-facebook  auth-form-btn flex-grow mr-1" 
                     >
-                      <i className="fab fa-facebook-f mr-2"></i>Facebook
+                     <i className="fab fa-facebook-f mr-2"></i>Facebook
                     </button>
                     
                     <button
