@@ -12,7 +12,10 @@ import Button from "@material-ui/core/Button";
 import { createCourse } from "../../api";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { getCoursebyId, updateCourse } from "../../api";
+import { useHistory, useParams } from "react-router-dom";
+import SplitPane, { Pane } from "react-split-pane";
+import "./splitpane.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,61 +40,138 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MainPageOne() {
-  const [picture, setPicture] = useState("");
-  const [register, setRegister] = useState("true");
-  const [certificate, setCertificate] = useState("true");
-  const [availability, setAvailability] = useState("true");
+  const [picture, setPicture] = useState(null);
+  const [register, setRegister] = useState(true);
+  const [certificate, setCertificate] = useState(true);
+  const [availability, setAvailability] = useState(true);
   const [courseName, setCourseName] = useState("");
   const [courseDesc, setCourseDesc] = useState("");
+  const [course, setCourse] = useState();
+  const [showPicture, setShowPicture] = useState(null);
   let history = useHistory();
   const classes = useStyles();
+  const { id } = useParams();
 
   const handleChangeRegister = (event) => {
-    setRegister(event.target.value);
+    setRegister(event.target.value === "true" ? true : false);
   };
 
   const handleChangeCertificate = (event) => {
-    setCertificate(event.target.value);
+    setCertificate(event.target.value === "true" ? true : false);
   };
 
   const handleChangeAvailability = (event) => {
-    setAvailability(event.target.value);
-    console.log(event.target.value);
+    setAvailability(event.target.value === "true" ? true : false);
+    console.log(event.target.value === "true" ? true : false);
   };
 
-  const handleCreateCourse = () => {
-    if (!courseName || !courseDesc || !picture) {
-      toast.error("Oops, Some Field are Unfilled");
-    } else {
-      axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
-      const formData = new FormData();
-      formData.append("file", picture[0]);
-      formData.append("name", courseName);
-      formData.append("desc", courseDesc);
-      formData.append("availability", availability);
-      formData.append("registration", register);
-      formData.append("certificate", certificate);
-      createCourse(formData).then((res) => {
+  useState(() => {
+    console.log(document.getElementsByClassName("deleteImage"));
+  }, [picture]);
+
+  useState(() => {
+    if (id) {
+      getCoursebyId(id).then((res) => {
+        console.log(res.data.course);
         if (res.data.status) {
-          toast(res.data.message);
-          history.push(`/editsubcontent/${res.data.course_id}`);
+          setCourse(res.data.course);
+          setCourseName(res.data.course.name);
+          setShowPicture(res.data.course.image);
+          setCourseDesc(res.data.course.description);
+          setAvailability(res.data.course.availability);
+          setCertificate(res.data.course.certificate);
+          setRegister(res.data.course.registration);
         } else {
-          toast.error(res.data.message);
+          toast(res.data.message);
         }
       });
+    }
+  }, []);
+
+  const handleCreateCourse = () => {
+    if (id) {
+      if (!courseName || !courseDesc) {
+        toast.error("Oops, Some Field are Unfilled");
+      } else {
+        if (picture) {
+          console.log("Picture change");
+          const formData = new FormData();
+          formData.append("file", picture[0]);
+          formData.append("name", courseName);
+          formData.append("desc", courseDesc);
+          formData.append("availability", availability);
+          formData.append("registration", register);
+          formData.append("certificate", certificate);
+          let params = {
+            withImage: true,
+            course_id: id,
+            orginalImage: showPicture,
+          };
+          updateCourse(formData, params).then((res) => {
+            if (res.data.status) {
+              toast(res.data.message);
+              history.push(`/editsubcontent/${id}`);
+            } else {
+              toast.error(res.data.message);
+            }
+          });
+        } else {
+          console.log("pic unchanged");
+          let payload = {
+            name: courseName,
+            desc: courseDesc,
+            availability,
+            certificate,
+            registration: register,
+          };
+          let params = {
+            withImage: false,
+            course_id: id,
+          };
+          updateCourse(payload, params).then((res) => {
+            if (res.data.status) {
+              toast(res.data.message);
+              history.push(`/editsubcontent/${id}`);
+            } else {
+              toast.error(res.data.message);
+            }
+          });
+        }
+      }
+    } else {
+      if (!courseName || !courseDesc || !picture) {
+        toast.error("Oops, Some Field are Unfilled");
+      } else {
+        axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
+        const formData = new FormData();
+        formData.append("file", picture[0]);
+        formData.append("name", courseName);
+        formData.append("desc", courseDesc);
+        formData.append("availability", availability);
+        formData.append("registration", register);
+        formData.append("certificate", certificate);
+        createCourse(formData).then((res) => {
+          if (res.data.status) {
+            toast(res.data.message);
+            history.push(`/editsubcontent/${res.data.course_id}`);
+          } else {
+            toast.error(res.data.message);
+          }
+        });
+      }
     }
   };
 
   const onDrop = (pic) => {
+    document.getElementsByClassName("deleteImage")[0].style.display = "none";
     setPicture(pic);
-    console.log(pic[0]);
   };
 
   // console.log({courseName, courseDesc});
   return (
     <div className={classes.root}>
       <div className={classes.header}>
-        <h4>My Course</h4>
+        <h4>{id ? "Edit" : "Create"} Course</h4>
         <div>
           <Button
             variant="contained"
@@ -107,12 +187,12 @@ export default function MainPageOne() {
             color="primary"
             onClick={handleCreateCourse}
           >
-            Continue
+            {id ? "Update" : "Continue"}
           </Button>
         </div>
       </div>
-      <Grid container spacing={0}>
-        <Grid item xs={6} className={classes.grid}>
+      <SplitPane split="vertical" minSize="40%">
+        <div style={{ padding: "20px" }}>
           <ImageUploader
             withIcon={true}
             buttonText="Choose images"
@@ -122,15 +202,31 @@ export default function MainPageOne() {
             withPreview={true}
             singleImage={true}
           />
-        </Grid>
-        <Grid item xs={6} className={classes.grid}>
+          {showPicture ? (
+            !picture ? (
+              <img
+                src={`${window.hostname}/images/${showPicture}`}
+                width="100%"
+                height="300px"
+                style={{ padding: "1px" }}
+              />
+            ) : (
+              ""
+            )
+          ) : (
+            ""
+          )}
+        </div>
+        <div style={{ padding: "10px" }}>
           <TextField
+            value={courseName}
             id="Course-Name"
             label="Course Name"
             className={classes.textField}
             onChange={(e) => setCourseName(e.target.value)}
           />
           <TextField
+            value={courseDesc}
             id="Course-Description"
             label="Course Description"
             className={classes.textField}
@@ -143,7 +239,7 @@ export default function MainPageOne() {
             <RadioGroup
               aria-label="course register"
               name="register"
-              value={register}
+              value={register ? "true" : "false"}
               onChange={handleChangeRegister}
             >
               <FormControlLabel value="true" control={<Radio />} label="Free" />
@@ -159,7 +255,7 @@ export default function MainPageOne() {
             <RadioGroup
               aria-label="course certificate"
               name="certificate"
-              value={certificate}
+              value={certificate ? "true" : "false"}
               onChange={handleChangeCertificate}
             >
               <FormControlLabel value="true" control={<Radio />} label="Yes" />
@@ -171,7 +267,7 @@ export default function MainPageOne() {
             <RadioGroup
               aria-label="course availability"
               name="availability"
-              value={availability}
+              value={availability ? "true" : "false"}
               onChange={handleChangeAvailability}
             >
               <FormControlLabel
@@ -186,8 +282,8 @@ export default function MainPageOne() {
               />
             </RadioGroup>
           </FormControl>
-        </Grid>
-      </Grid>
+        </div>
+      </SplitPane>
     </div>
   );
 }

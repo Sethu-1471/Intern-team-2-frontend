@@ -7,7 +7,12 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { getCourseByUserId, getAllPublicCourse,deleteCourse, getUser } from "../../api";
+import {
+  getCourseByUserId,
+  getAllPublicCourse,
+  deleteCourse,
+  getUser,
+} from "../../api";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -60,13 +65,21 @@ function CourseCard({ content, admin, deleteCourseHandle, user }) {
             color="primary"
             onClick={() => history.push("/editsubcontent/" + content._id)}
           >
-            admin panel
+            Edit Course
           </Button>
-          <Button size="small" color="primary" onClick={() => {
-            if (window.confirm("Delete Course reflect to registered user also, continue to delete ?")) {
-              deleteCourseHandle(content._id);
-            }
-          }}>
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => {
+              if (
+                window.confirm(
+                  "Delete Course reflect to registered user also, continue to delete ?"
+                )
+              ) {
+                deleteCourseHandle(content._id);
+              }
+            }}
+          >
             Delete
           </Button>
         </CardActions>
@@ -76,10 +89,12 @@ function CourseCard({ content, admin, deleteCourseHandle, user }) {
             size="small"
             variant="contained"
             color="primary"
-              onClick={() => history.push("/payment/" + content._id)}
-              disabled={content.userEnrolled.find(o => o.user === user._id)}
+            onClick={() => history.push("/payment/" + content._id)}
+            disabled={content.userEnrolled.find((o) => o.user === user._id)}
           >
-            {content.userEnrolled.find(o => o.user === user._id) ? "Already Enrolled" : "Enroll"}
+            {content.userEnrolled.find((o) => o.user === user._id)
+              ? "Already Enrolled"
+              : "Enroll"}
           </Button>
           <Button size="small" color="primary" disabled>
             {content.registration ? "free" : "cost"}
@@ -119,22 +134,22 @@ export default function CoursesList() {
         }
       });
     }
-  }
+  };
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user")));
     getCourse();
   }, []);
 
-  const deleteCourseHandle = async(id) => {
-    deleteCourse(id).then(res => {
+  const deleteCourseHandle = async (id) => {
+    deleteCourse(id).then((res) => {
       if (res.data.status) {
         toast(res.data.message);
         getCourse();
       } else {
         toast.error(res.data.message);
       }
-    })
-  }
+    });
+  };
 
   return (
     <div>
@@ -150,7 +165,9 @@ export default function CoursesList() {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => admin ? history.push("/addcourse") : history.push("/mycourse")}
+          onClick={() =>
+            admin ? history.push("/addcourse") : history.push("/mycourse")
+          }
         >
           {admin ? "add course" : "Explore my course"}
         </Button>
@@ -163,7 +180,12 @@ export default function CoursesList() {
               key={i}
               className="col-12 col-md-4 mt-5 d-flex justify-content-center"
             >
-              <CourseCard content={d} admin={admin} user={user} deleteCourseHandle={deleteCourseHandle} />
+              <CourseCard
+                content={d}
+                admin={admin}
+                user={user}
+                deleteCourseHandle={deleteCourseHandle}
+              />
             </div>
           ))}
         </div>

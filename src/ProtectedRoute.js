@@ -10,7 +10,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
       {...rest}
       render={(props) => {
         if (localStorage.getItem("jwt") && localStorage.getItem("user")) {
-          const list = ["/login", "/register", "/"];
+          const list = ["/login", "/register", "/", ""];
           if (!list.includes(props.location.pathname)) {
             // axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("jwt");
             return <Component {...props} />;
@@ -18,7 +18,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
             return <Redirect to="/courselist" />;
           }
         } else {
-          const list = ["/login", "/register", "/"];
+          const list = ["/login", "/register", "/", ""];
           if (list.includes(props.location.pathname)) {
             return <Component {...props} />;
           } else {

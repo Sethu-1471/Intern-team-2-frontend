@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -95,7 +95,7 @@ export default function PrimarySearchAppBar() {
     } else {
       setAdmin(false);
     }
-  })
+  });
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -199,7 +199,10 @@ export default function PrimarySearchAppBar() {
             noWrap
             onClick={() => history.push("/courselist")}
           >
-            Co-Tutor<small style={{ fontSize: 10 }}>{admin ? "/Teacher" : "/Student"}</small>
+            Co-Tutor
+            <small style={{ fontSize: 10 }}>
+              {admin ? "/Teacher" : "/Student"}
+            </small>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -226,8 +229,8 @@ export default function PrimarySearchAppBar() {
             ) : (
               <IconButton
                 aria-label="show 17 new notifications"
-                  color="inherit"
-                  onClick={() => history.push("/mycourse")}
+                color="inherit"
+                onClick={() => history.push("/mycourse")}
               >
                 <AllInbox />
               </IconButton>

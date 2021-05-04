@@ -8,42 +8,50 @@ import CourseEditSubPage from "./components/CourseCreate/MainPageTwo";
 import CourseList from "./components/CoursesHome/CoursesList";
 import Coursedetail from "./components/Student/CourseStudy/Coursedetail";
 import VideoView from "./components/ModuleContentView/VideoView"
+import Loader from "./components/Loader/Loader"
+import Error404 from "./components/Error/Error404"
 import MyCourse from "./components/Student/MyCourse"
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header/Header";
+import Landing from "./components/Landing/Landing";
 import ProfilePage from "./components/Profile/ProfilePage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useLocation } from "react-router-dom";
-
+import {useAxiosLoader} from './api/index'
 //student
 import StudentPaymentEnroll from "./components/Student/PaymentEnroll";
 import AdminPage from "./components/AdminPage/AdminPage";
+import { useState } from "react";
 
 
 function App() {
   const location = useLocation();
   console.log(location.pathname.split("/")[1]);
+  const [load] = useAxiosLoader();
   const list = ["login", "register", "/", "payment", ""];
   return (
     <>
+      { load && 
+      <Loader/>      
+      }
       <ToastContainer />
       {list.includes(location.pathname.split("/")[1]) ? null : <Header />}
       <Switch>
-           
-        {/* <ProtectedRoute path="/" exact component={login}/> */}
+        <ProtectedRoute path="/" exact component={Landing} />
+      
         <ProtectedRoute path="/register" exact component={register} />
         <ProtectedRoute path="/login" exact component={login} />
         <ProtectedRoute path="/courselist" component={CourseList} />
-        {/* <ProtectedRoute path={`/courselist/token`} component={CourseList} /> */}
         <ProtectedRoute path="/addcourse" component={CourseAddMainPage} />
         <ProtectedRoute
           path={`/editsubcontent/:id`}
           component={CourseEditSubPage}
         />
+        <ProtectedRoute path={`/course/:id`} component={Coursedetail} />
         <ProtectedRoute
-          path={`/course/:id`}
-          component={Coursedetail}
+          path={`/editcourse/:id`}
+          component={CourseAddMainPage}
         />
         <ProtectedRoute
           path={`/payment/:id`}
@@ -52,10 +60,7 @@ function App() {
         <ProtectedRoute path={"/profile"} component={ProfilePage} />
         <ProtectedRoute path={"/mycourse"} component={MyCourse} />
         <ProtectedRoute path={"/videoview/:cid/:mcid"} component={VideoView} />
-        <ProtectedRoute path={"/admin/dashboard"} exact component={AdminPage} />
-        <Route path="*" component={() => "404 Not Found"} />
-
-        <Chatbot/>
+        <Route path="*" component={Error404} />
       </Switch>
     </>
   );
