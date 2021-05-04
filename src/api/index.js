@@ -1,4 +1,5 @@
 import axios from "axios";
+import React,{ useState, useCallback,useMemo, useEffect } from 'react'
 
 // const api = axios.create({
 //   baseURL: "https://hidden-hamlet-43774.herokuapp.com",
@@ -21,6 +22,27 @@ api.interceptors.request.use(function (config) {
 
   return config;
 });
+
+export const useAxiosLoader = () => {
+  const [counter, setCounter] = useState(0);
+  const inc = useCallback(() => setCounter(counter => counter + 1), [setCounter]); 
+  const dec = useCallback(() => setCounter(counter => counter - 1), [setCounter]); 
+  const interceptors = useMemo(() => ({
+    request: config => (inc(), config),
+    response: response => (dec(), response),
+    error: error => (dec(), Promise.reject(error)),
+  }), [inc, dec]);
+  useEffect(() => {
+    const reqInterceptor = api.interceptors.request.use(interceptors.request, interceptors.error);
+    const resInterceptor =  api.interceptors.response.use(interceptors.response, interceptors.error);
+    return () => {
+      api.interceptors.request.eject(reqInterceptor);
+      api.interceptors.response.eject(resInterceptor);
+    };
+  }, [interceptors]);
+  return [counter > 0];
+};
+
 
 //Auth
 export const register = (payload) => api.post(`/auth/register`, payload);
@@ -137,7 +159,8 @@ const apis = {
   sendOTP,
   submitAssignment,
   updateCourse,
-  changePassword
+  changePassword,
+  useAxiosLoader
 };
 export default apis;
 
