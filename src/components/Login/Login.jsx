@@ -128,7 +128,7 @@ function Login() {
                   </div>
                   <div className="text-center mt-4 font-weight-light">
                     Don't have an account?{" "}
-                    <a onClick={() => { history.push("/register") }} className="text-primary-color">
+                    <a onClick={() => {history.push("/register") }} className="text-primary-color">
                       Create
                     </a>
                   </div>
