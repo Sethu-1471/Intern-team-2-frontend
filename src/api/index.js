@@ -2,13 +2,13 @@ import axios from "axios";
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-// const api = axios.create({
-//   baseURL: "https://hidden-hamlet-43774.herokuapp.com",
-// });
-
 const api = axios.create({
-  baseURL: "http://localhost:3400",
+  baseURL: "https://hidden-hamlet-43774.herokuapp.com",
 });
+
+// const api = axios.create({
+//   baseURL: "http://localhost:3400",
+// });
 
 // api.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("jwt")
 
