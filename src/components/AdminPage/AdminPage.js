@@ -6,11 +6,11 @@ import StudentsSubmission from "./StudentsSubmission/StudentsSubmission";
 import UsersTable from "./UsersTable/UsersTable";
 
 const AdminPage = () => {
-    return (
-        <div className="admin-container py-4">
-            <UsersTable />
-        </div>
-    );
+  return (
+    <div className="admin-container py-4">
+      <UsersTable />
+    </div>
+  );
 };
 
 export default AdminPage;

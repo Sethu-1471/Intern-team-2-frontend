@@ -18,7 +18,6 @@ export default function DocumentDialogBox(props) {
 
   const handleClose = () => {
     props.handleDialog();
-    
   };
 
   const handleSubmit = () => {
@@ -35,7 +34,6 @@ export default function DocumentDialogBox(props) {
         toast.error("File is required");
       }
     }
-    
   };
 
   return (
@@ -57,8 +55,11 @@ export default function DocumentDialogBox(props) {
             ""
           )}
         </DialogTitle>
-              <DialogContent>
-                  <p>You can resubmit your assignment file until staff mark it as completed. Staff may be add review every time after your submission.</p>
+        <DialogContent>
+          <p>
+            You can resubmit your assignment file until staff mark it as
+            completed. Staff may be add review every time after your submission.
+          </p>
           {/* <DialogContentText>
             Enter your course submodule name 
           </DialogContentText> */}
@@ -67,6 +68,25 @@ export default function DocumentDialogBox(props) {
               Your Submission Count:{" "}
               {props.submittedAssignment.studentSubmissionCount}
             </p>
+          )}
+
+          {props.submittedAssignment && (
+            <div>
+              <p>
+                Last student submission time:{" "}
+                {new Date(
+                  parseInt(props.submittedAssignment.studentSubmitTime)
+                ).toLocaleString()}{" "}
+              </p>
+              <p>
+                Last Staff review:{" "}
+                {props.submittedAssignment.staffReviewTime
+                  ? new Date(
+                      parseInt(props.submittedAssignment.staffReviewTime)
+                    ).toLocaleString()
+                  : "Till Not reviewed"}{" "}
+              </p>
+            </div>
           )}
           <TextField
             value={
@@ -92,33 +112,42 @@ export default function DocumentDialogBox(props) {
             label="Description"
             fullWidth
           />
-          {props.submittedAssignment ? props.submittedAssignment.completed ? 'Staff Mark it as Completed. So you can"t submit assignment' : <input
-            type="file"
-            onChange={(e) => setFile(e.target.files[0])}
-            accept={
-              props.assignment.type === "Video"
-                ? "video/*"
-                : props.assignment.type === "Document"
-                ? "application/pdf,.doc,.docx"
-                : "image/*"
-            }
-          />: <input
-            type="file"
-            onChange={(e) => setFile(e.target.files[0])}
-            accept={
-              props.assignment.type === "Video"
-                ? "video/*"
-                : props.assignment.type === "Document"
-                ? "application/pdf,.doc,.docx"
-                : "image/*"
-            }
-          />}
+          {props.submittedAssignment ? (
+            props.submittedAssignment.completed ? (
+              'Staff Mark it as Completed. So you can"t submit assignment'
+            ) : (
+              <input
+                type="file"
+                onChange={(e) => setFile(e.target.files[0])}
+                accept={
+                  props.assignment.type === "Video"
+                    ? "video/*"
+                    : props.assignment.type === "Document"
+                    ? "application/pdf,.doc,.docx"
+                    : "image/*"
+                }
+              />
+            )
+          ) : (
+            <input
+              type="file"
+              onChange={(e) => setFile(e.target.files[0])}
+              accept={
+                props.assignment.type === "Video"
+                  ? "video/*"
+                  : props.assignment.type === "Document"
+                  ? "application/pdf,.doc,.docx"
+                  : "image/*"
+              }
+            />
+          )}
           <p>
             {props.assignment.type === "Video"
               ? "Video Format"
               : props.assignment.type === "Document"
               ? "Document Format"
-              : "Photo Format"}{props.assignment.type}
+              : "Photo Format"}
+            {props.assignment.type}
           </p>
           {props.submittedAssignment && (
             <p>
@@ -164,7 +193,11 @@ export default function DocumentDialogBox(props) {
                 : false
             }
           >
-            {props.submittedAssignment ? props.submittedAssignment.completed ?  " Staff mark it as completed": "ReSubmit" : "upload"}
+            {props.submittedAssignment
+              ? props.submittedAssignment.completed
+                ? " Staff mark it as completed"
+                : "ReSubmit"
+              : "upload"}
           </Button>
         </DialogActions>
       </Dialog>

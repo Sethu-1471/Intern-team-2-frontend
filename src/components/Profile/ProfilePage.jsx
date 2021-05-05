@@ -7,7 +7,7 @@ import {
   TableRow,
   Button,
 } from "@material-ui/core";
-import Dialog from "./ChangePassword"
+import Dialog from "./ChangePassword";
 import "./ProfilePage.css";
 import { useHistory } from "react-router";
 import { changePassword } from "../../api";
@@ -54,43 +54,48 @@ const ProfilePage = () => {
 
   const handleDialog = (payload) => {
     if (payload) {
-      changePassword(payload).then(res => {
+      changePassword(payload).then((res) => {
         if (res.data.status) {
           toast(res.data.message);
-          setDialog(false); 
+          setDialog(false);
         } else {
           toast.error(res.data.message);
         }
-      })
+      });
     } else {
-      setDialog(false); 
+      setDialog(false);
     }
   };
 
   return (
     <div>
       <Dialog handleDialog={handleDialog} handleShow={dialog} />
-    <div className="profile-container">
-      <div className="profile-picture">
-        <i className="fas fa-user-circle"></i>
+      <div className="profile-container">
+        <div className="profile-picture">
+          <i className="fas fa-user-circle"></i>
+        </div>
+        <TableBody>
+          {detail.map((row) => (
+            <TableRow key={row.title}>
+              <TableCell component="th" scope="row">
+                <h6 className="profile-title">{row.title}</h6>
+              </TableCell>
+              <TableCell align="right">
+                <span className="profile-content">{row.content}</span>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <Button
+          variant="contained"
+          onClick={() => setDialog(true)}
+          color="primary"
+          style={{ marginTop: 20 }}
+        >
+          Change Password
+        </Button>
       </div>
-      <TableBody>
-        {detail.map((row) => (
-          <TableRow key={row.title}>
-            <TableCell component="th" scope="row">
-              <h6 className="profile-title">{row.title}</h6>
-            </TableCell>
-            <TableCell align="right">
-              <span className="profile-content">{row.content}</span>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-      <Button variant="contained" onClick={() => setDialog(true)} color="primary" style={{ marginTop: 20 }}>
-        Change Password
-      </Button>
-      </div>
-      </div>
+    </div>
   );
 };
 

@@ -46,7 +46,7 @@ function CourseCard({ content, admin, deleteCourseHandle, user }) {
         <CardMedia
           className={classes.media}
           image={`${window.hostname}/images/${content.image}`}
-          title="Contemplative Reptile"
+          title={content.name}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -155,13 +155,6 @@ export default function CoursesList() {
     <div>
       <div className={classes.header}>
         <h4>{admin ? "My Course" : "Course for you..!"}</h4>
-        {admin && <Button
-          variant="contained"
-          color="primary"
-          onClick={() => history.push("/admin/dashboard")}
-        >
-          Dashboard
-        </Button>}
         <Button
           variant="contained"
           color="primary"

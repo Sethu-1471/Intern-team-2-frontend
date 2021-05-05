@@ -152,23 +152,19 @@
   border-right: 0 !important;
 }
 
-.text-primary-color  {
+.text-primary-color {
   color: #392c70 !important;
- 
 }
 
-input{
-  outline:none !important;
-
+input {
+  outline: none !important;
 }
-input:focus{
-  outline:none !important;
- box-shadow:none !important;
- border-color: #ced4da !important;
-
-
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #ced4da !important;
 }
-a{
+a {
   color: #392c70 !important;
   font-weight: 400;
 }
@@ -278,14 +274,13 @@ a {
   color: #ffffff !important;
 }
 .btn-facebook {
-  background: 	#4267B2 !important;
+  background: #4267b2 !important;
   color: #ffffff !important;
 }
 
 .btn i {
   font-size: 1rem;
 }
-
 
 .mr-2 {
   margin-right: 0.5rem !important;

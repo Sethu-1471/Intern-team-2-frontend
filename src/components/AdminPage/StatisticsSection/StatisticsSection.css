@@ -1,18 +1,18 @@
 .round-icon {
-    width: 3rem;
-    height: 3rem;
-    background-color: rgb(209, 0, 63);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    border-radius: 100%;
+  width: 3rem;
+  height: 3rem;
+  background-color: rgb(209, 0, 63);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  border-radius: 100%;
 }
 
 .statistics-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 18rem));
-    grid-gap: 2rem;
-    justify-content: center;
-    align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 18rem));
+  grid-gap: 2rem;
+  justify-content: center;
+  align-items: center;
 }
