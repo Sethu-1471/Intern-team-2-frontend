@@ -1,6 +1,6 @@
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
-import Chatbot from "./components/Chatbot/chat";
+import Chatbot from "./components/Chatbot/Chat";
 import register from "./components/Register/Register";
 import login from "./components/Login/Login.jsx";
 import CourseAddMainPage from "./components/CourseCreate/MainPageOne";

@@ -111,14 +111,14 @@ function Login() {
                     </a>
                   </div>
                   <div className="mb-2 d-flex">
-                    
+
                     <button
                       type="button"
-                      className="btn btn-facebook  auth-form-btn flex-grow mr-1" 
+                      className="btn btn-facebook  auth-form-btn flex-grow mr-1"
                     >
-                     <i className="fab fa-facebook-f mr-2"></i>Facebook
+                      <i className="fab fa-facebook-f mr-2"></i>Facebook
                     </button>
-                    
+
                     <button
                       type="button"
                       className="btn btn-google auth-form-btn flex-grow ml-1"
@@ -128,7 +128,7 @@ function Login() {
                   </div>
                   <div className="text-center mt-4 font-weight-light">
                     Don't have an account?{" "}
-                    <a onClick={() =>{history.push("/register")}} className="text-primary-color">
+                    <a onClick={() => { history.push("/register") }} className="text-primary-color">
                       Create
                     </a>
                   </div>
