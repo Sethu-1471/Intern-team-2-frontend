@@ -113,6 +113,9 @@ function Login() {
                   <div className="mb-2 d-flex">
                     <button
                       type="button"
+                      onClick={(e)=> {
+                       window.open('https://www.facebook.com/');
+                      }}
                       className="btn btn-facebook  auth-form-btn flex-grow mr-1"
                     >
                       <i className="fab fa-facebook-f mr-2"></i>Facebook
@@ -120,6 +123,9 @@ function Login() {
 
                     <button
                       type="button"
+                      onClick={(e)=> {
+                        window.open('https://accounts.google.com/login');
+                       }}
                       className="btn btn-google auth-form-btn flex-grow ml-1"
                     >
                       <i className="fab fa-google mr-2"></i>Google
