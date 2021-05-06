@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useCallback, useMemo, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 const api = axios.create({
   baseURL: "https://hidden-hamlet-43774.herokuapp.com",
@@ -25,17 +26,26 @@ api.interceptors.request.use(function (config) {
 
 export const useAxiosLoader = () => {
   const [counter, setCounter] = useState(0);
+  const router = useHistory()
   const inc = useCallback(() => setCounter((counter) => counter + 1), [
     setCounter,
   ]);
   const dec = useCallback(() => setCounter((counter) => counter - 1), [
     setCounter,
   ]);
+  const decwitherror = useCallback((err) =>{
+    dec()
+    if(err.response && (err.response.status===401 || err.response.status==='401')){
+        router.push('/login')
+    }
+  }, [
+    setCounter,
+  ]);
   const interceptors = useMemo(
     () => ({
       request: (config) => (inc(), config),
       response: (response) => (dec(), response),
-      error: (error) => (dec(), Promise.reject(error)),
+      error: (error) => (decwitherror(error), Promise.reject(error)),
     }),
     [inc, dec]
   );
