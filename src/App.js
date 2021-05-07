@@ -59,6 +59,7 @@ function App() {
         <ProtectedRoute path={"/mycourse"} component={MyCourse} />
         <ProtectedRoute path={"/assignment/:id"} component={AssignmentReview} />
         <ProtectedRoute path={"/videoview/:cid/:mcid"} component={VideoView} />
+        <ProtectedRoute path="/admin/dashboard" exact component={AdminPage}/>
         <Route path="*" component={Error404} />
       </Switch>
     </>
