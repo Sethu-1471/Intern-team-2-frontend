@@ -14,6 +14,8 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "chatbot": "^1.2.3",
+    "dom-to-image": "^2.6.0",
+    "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
     "react": "^17.0.2",
@@ -27,6 +29,7 @@
     "react-swipeable-views": "^0.13.9",
     "react-toastify": "^7.0.4",
     "require-stack": "^1.0.2",
+    "sweetalert": "^2.1.2",
     "web-vitals": "^1.1.1"
   },
   "scripts": {

@@ -2,13 +2,15 @@ import axios from "axios";
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-const api = axios.create({
-  baseURL: "https://hidden-hamlet-43774.herokuapp.com",
-});
+
 
 // const api = axios.create({
-//   baseURL: "http://localhost:3400",
+//   baseURL: "https://hidden-hamlet-43774.herokuapp.com",
 // });
+
+const api = axios.create({
+  baseURL: "http://localhost:3400",
+});
 
 // api.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("jwt")
 
@@ -16,13 +18,29 @@ const api = axios.create({
 //   'Authorization': "Bearer " + localStorage.getItem("jwt")
 // }
 
+
+const HandleUnAuth = () => {
+  localStorage.clear();
+  window.location = '/login';
+}
+
+api.interceptors.response.use(response => {
+  return response;
+}, error => {
+ if (error.response.status === 401) {
+   HandleUnAuth();
+ }
+ return error;
+});
+
+
 // Add a request interceptor
-api.interceptors.request.use(function (config) {
+api.interceptors.request.use( (config) => {
   const token = "Bearer " + localStorage.getItem("jwt");
   config.headers.Authorization = token;
-
   return config;
-});
+}
+);
 
 export const useAxiosLoader = () => {
   const [counter, setCounter] = useState(0);
@@ -30,14 +48,13 @@ export const useAxiosLoader = () => {
   const inc = useCallback(() => setCounter((counter) => counter + 1), [
     setCounter,
   ]);
-  const dec = useCallback(() => setCounter((counter) => counter - 1), [
+  const dec = useCallback(() => {
+    return setCounter((counter) => counter - 1)
+  }, [
     setCounter,
   ]);
   const decwitherror = useCallback((err) =>{
     dec()
-    if(err.response && (err.response.status===401 || err.response.status==='401')){
-        router.push('/login')
-    }
   }, [
     setCounter,
   ]);
@@ -58,6 +75,7 @@ export const useAxiosLoader = () => {
       interceptors.response,
       interceptors.error
     );
+    
     return () => {
       api.interceptors.request.eject(reqInterceptor);
       api.interceptors.response.eject(resInterceptor);
@@ -68,7 +86,7 @@ export const useAxiosLoader = () => {
 
 //Auth
 export const register = (payload) => api.post(`/auth/register`, payload);
-export const login = (payload) => api.post(`/auth/login`, payload);
+export const login = (payload) => api.post(`/auth/login`, payload)
 export const sendOTP = (payload) => api.post(`/auth/otp`, payload);
 export const getUser = () => api.get(`/auth/getuser`);
 export const changePassword = (payload) =>
@@ -78,11 +96,12 @@ export const changePassword = (payload) =>
 export const createCourse = (payload) =>
   api.post(`/course/createcourse`, payload);
 
+
 export const submitAssignment = (payload) =>
   api.post(`/course/submitassignment`, payload);
 
 //Get All public course
-export const getAllPublicCourse = (id) => api.get(`/course/getallpubliccourse`);
+export const getAllPublicCourse = (id) => api.get(`/course/getallpubliccourse`)
 
 //Get Course by course id
 export const getCoursebyId = (id, auth) =>
@@ -200,7 +219,7 @@ const apis = {
   updateCourse,
   changePassword,
   reviewAssignment,
-  useAxiosLoader,
+  useAxiosLoader
 };
 export default apis;
 

@@ -152,14 +152,14 @@ export default function MainPageTwo() {
           >
             Edit Course Details
           </Button>
-          <Button
+          {/* <Button
             variant="contained"
             color="primary"
             onClick={() => setDialogShow(true)}
             style={{ margin: "10px 20px" }}
           >
             Overview
-          </Button>
+          </Button> */}
           <Button
             variant="contained"
             color="primary"

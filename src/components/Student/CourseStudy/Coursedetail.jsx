@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import SubModule from "./SubMoudles";
 import SplitPane, { Pane } from "react-split-pane";
 import "../../CourseCreate/splitpane.css";
+import "./certificate.css"
 
 export default function MainPageTwo() {
   let { id } = useParams();
@@ -24,9 +25,16 @@ export default function MainPageTwo() {
     });
   }, []);
 
-  const handleNameChange = (e) => {
-    setModulename(e);
-  };
+  const handledownloadCertificate = () => {
+    var domtoimage = require("dom-to-image");
+    domtoimage
+      .toBlob(document.getElementById("my-node"))
+      .then((blob) => {
+        var FileSaver = require('file-saver');
+        FileSaver.saveAs(blob,`${JSON.parse(localStorage.getItem("user")).name + `-` + course.name}.png`);
+      });
+  }
+
 
   if (!course) return null;
   return (
@@ -44,9 +52,10 @@ export default function MainPageTwo() {
           <p>
             Certificate -{" "}
             {course.certificate
-              ? "Download Certificate after completion of course"
+              ? <Button onClick={() => handledownloadCertificate()} >Download</Button>
               : "Not Available"}
           </p>
+          
           <p>Instructor - {course.staffId.name} </p>
           <p>Instructor email id - {course.staffId.email} </p>
           <p>You can reach him/her by mail</p>
@@ -61,6 +70,56 @@ export default function MainPageTwo() {
           )}
         </div>
       </SplitPane>
+      {/* <!-- //certiy --> */}
+    <div class="mm">
+    <div class="massContainer" id="my-node">
+      <div class="container pm-certificate-container">
+        <div class="outer-border"></div>
+        <div class="inner-border"></div>
+
+        <div class="pm-certificate-border col-xs-12">
+          <div class="row pm-certificate-header">
+            <div class="pm-certificate-title cursive col-xs-12 text-center" style={{width: "700px"}}>
+              <center><h2>Certificate of Completion</h2></center>
+            </div>
+          </div>
+
+          <div class="row pm-certificate-body">
+            <div class="pm-certificate-block">
+              <div class="col-xs-12">
+                <div class="row">
+                  <div class="col-xs-2"></div>
+                  <div
+                    class="pm-certificate-name underline margin-0 col-xs-8 text-center" style={{width: "700px"}}
+                  >
+                    <center><span class="pm-name-text bold"
+                      > { JSON.parse(localStorage.getItem("user")).name } </span></center>
+                  </div>
+                  <div class="col-xs-2"></div>
+                </div>
+              </div>
+
+              <div class="col-xs-12">
+                <div class="row">
+                  <div class="col-xs-2"></div>
+                  <div class="pm-earned col-xs-8 text-center" style={{width: "700px"}}>
+                    <center class="pm-earned-text padding-0 block cursive"
+                      >has earned a completion certificate for the{course.name} course on <span  style={{ fontSize: "12px" }}>{new Date().toLocaleString()} </span>  </center>
+                    <span class="pm-credits-text block bold sans" style={{ marginTop: "25px" }}
+                      >Credits: co-tutor</span>
+                  </div>
+                  <div class="col-xs-2"></div>
+                  <div class="col-xs-12"></div>
+                </div>
+              </div>
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+     </div>
     </div>
   );
 }
