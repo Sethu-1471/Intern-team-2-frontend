@@ -21,15 +21,15 @@ export default function VideoDialogBox(props) {
     props.handleDialog();
   };
 
-    const handleSubmit = () => {
-        if (password === confirmPassword && confirmPassword) {
-            let payload = {
-                password
-              };
-              props.handleDialog(payload); 
-        } else {
-            toast.error("Passowrd Not match");
-      }
+  const handleSubmit = () => {
+    if (password === confirmPassword && confirmPassword) {
+      let payload = {
+        password,
+      };
+      props.handleDialog(payload);
+    } else {
+      toast.error("Passowrd Not match");
+    }
   };
 
   return (
@@ -59,7 +59,6 @@ export default function VideoDialogBox(props) {
             fullWidth
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

@@ -7,23 +7,23 @@ import CourseAddMainPage from "./components/CourseCreate/MainPageOne";
 import CourseEditSubPage from "./components/CourseCreate/MainPageTwo";
 import CourseList from "./components/CoursesHome/CoursesList";
 import Coursedetail from "./components/Student/CourseStudy/Coursedetail";
-import VideoView from "./components/ModuleContentView/VideoView"
-import Loader from "./components/Loader/Loader"
-import Error404 from "./components/Error/Error404"
-import MyCourse from "./components/Student/MyCourse"
+import VideoView from "./components/ModuleContentView/VideoView";
+import Loader from "./components/Loader/Loader";
+import Error404 from "./components/Error/Error404";
+import MyCourse from "./components/Student/MyCourse";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header/Header";
 import Landing from "./components/Landing/Landing";
+import AssignmentReview from "./components/Assignment";
 import ProfilePage from "./components/Profile/ProfilePage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useLocation } from "react-router-dom";
-import {useAxiosLoader} from './api/index'
+import { useAxiosLoader } from "./api/index";
 //student
 import StudentPaymentEnroll from "./components/Student/PaymentEnroll";
 import AdminPage from "./components/AdminPage/AdminPage";
 import { useState } from "react";
-
 
 function App() {
   const location = useLocation();
@@ -32,14 +32,12 @@ function App() {
   const list = ["login", "register", "/", "payment", ""];
   return (
     <>
-      { load && 
-      <Loader/>      
-      }
+      {load && <Loader />}
       <ToastContainer />
       {list.includes(location.pathname.split("/")[1]) ? null : <Header />}
       <Switch>
         <ProtectedRoute path="/" exact component={Landing} />
-      
+
         <ProtectedRoute path="/register" exact component={register} />
         <ProtectedRoute path="/login" exact component={login} />
         <ProtectedRoute path="/courselist" component={CourseList} />
@@ -59,6 +57,7 @@ function App() {
         />
         <ProtectedRoute path={"/profile"} component={ProfilePage} />
         <ProtectedRoute path={"/mycourse"} component={MyCourse} />
+        <ProtectedRoute path={"/assignment/:id"} component={AssignmentReview} />
         <ProtectedRoute path={"/videoview/:cid/:mcid"} component={VideoView} />
         <ProtectedRoute path="/admin/dashboard" exact component={AdminPage}/>
         <Route path="*" component={Error404} />

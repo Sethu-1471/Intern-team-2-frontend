@@ -1,5 +1,8 @@
 import axios from "axios";
-import React,{ useState, useCallback,useMemo, useEffect } from 'react'
+import React, { useState, useCallback, useMemo, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
+
 
 // const api = axios.create({
 //   baseURL: "https://hidden-hamlet-43774.herokuapp.com",
@@ -15,26 +18,64 @@ const api = axios.create({
 //   'Authorization': "Bearer " + localStorage.getItem("jwt")
 // }
 
+
+const HandleUnAuth = () => {
+  localStorage.clear();
+  window.location = '/login';
+}
+
+api.interceptors.response.use(response => {
+  return response;
+}, error => {
+ if (error.response.status === 401) {
+   HandleUnAuth();
+ }
+ return error;
+});
+
+
 // Add a request interceptor
-api.interceptors.request.use(function (config) {
+api.interceptors.request.use( (config) => {
   const token = "Bearer " + localStorage.getItem("jwt");
   config.headers.Authorization = token;
-
   return config;
-});
+}
+);
 
 export const useAxiosLoader = () => {
   const [counter, setCounter] = useState(0);
-  const inc = useCallback(() => setCounter(counter => counter + 1), [setCounter]); 
-  const dec = useCallback(() => setCounter(counter => counter - 1), [setCounter]); 
-  const interceptors = useMemo(() => ({
-    request: config => (inc(), config),
-    response: response => (dec(), response),
-    error: error => (dec(), Promise.reject(error)),
-  }), [inc, dec]);
+  const router = useHistory()
+  const inc = useCallback(() => setCounter((counter) => counter + 1), [
+    setCounter,
+  ]);
+  const dec = useCallback(() => {
+    return setCounter((counter) => counter - 1)
+  }, [
+    setCounter,
+  ]);
+  const decwitherror = useCallback((err) =>{
+    dec()
+  }, [
+    setCounter,
+  ]);
+  const interceptors = useMemo(
+    () => ({
+      request: (config) => (inc(), config),
+      response: (response) => (dec(), response),
+      error: (error) => (decwitherror(error), Promise.reject(error)),
+    }),
+    [inc, dec]
+  );
   useEffect(() => {
-    const reqInterceptor = api.interceptors.request.use(interceptors.request, interceptors.error);
-    const resInterceptor =  api.interceptors.response.use(interceptors.response, interceptors.error);
+    const reqInterceptor = api.interceptors.request.use(
+      interceptors.request,
+      interceptors.error
+    );
+    const resInterceptor = api.interceptors.response.use(
+      interceptors.response,
+      interceptors.error
+    );
+    
     return () => {
       api.interceptors.request.eject(reqInterceptor);
       api.interceptors.response.eject(resInterceptor);
@@ -43,23 +84,24 @@ export const useAxiosLoader = () => {
   return [counter > 0];
 };
 
-
 //Auth
 export const register = (payload) => api.post(`/auth/register`, payload);
-export const login = (payload) => api.post(`/auth/login`, payload);
+export const login = (payload) => api.post(`/auth/login`, payload)
 export const sendOTP = (payload) => api.post(`/auth/otp`, payload);
 export const getUser = () => api.get(`/auth/getuser`);
-export const changePassword = (payload) => api.put(`auth/changepassword`, payload);
+export const changePassword = (payload) =>
+  api.put(`auth/changepassword`, payload);
 
 //Course
 export const createCourse = (payload) =>
   api.post(`/course/createcourse`, payload);
 
+
 export const submitAssignment = (payload) =>
   api.post(`/course/submitassignment`, payload);
 
 //Get All public course
-export const getAllPublicCourse = (id) => api.get(`/course/getallpubliccourse`);
+export const getAllPublicCourse = (id) => api.get(`/course/getallpubliccourse`)
 
 //Get Course by course id
 export const getCoursebyId = (id, auth) =>
@@ -75,11 +117,11 @@ export const updateCourse = (payload, params) =>
     params: params,
   });
 
-  // /Update Assignment
+// /Update Assignment
 export const updateAssignment = (payload, params) =>
   api.put(`/course/updateassignment`, payload, {
-  params
-});
+    params,
+  });
 
 //Getting all tutorial items
 export const getVideo = (id, vid, type) =>
@@ -88,6 +130,14 @@ export const getVideo = (id, vid, type) =>
       course_id: id,
       video_id: vid,
       type: type,
+    },
+  });
+
+//Getting all tutorial items
+export const getAllAssignment = (id) =>
+  api.get(`/course/getassignment`, {
+    params: {
+      course_id: id,
     },
   });
 
@@ -148,6 +198,14 @@ export const uploadAssignment = (payload, course_id, module_id) =>
     },
   });
 
+export const reviewAssignment = (payload, course_id, module_id) =>
+  api.put(`/course/reviewassignmnet`, payload, {
+    params: {
+      course_id,
+      module_id,
+    },
+  });
+
 const apis = {
   register,
   login,
@@ -160,6 +218,7 @@ const apis = {
   submitAssignment,
   updateCourse,
   changePassword,
+  reviewAssignment,
   useAxiosLoader
 };
 export default apis;

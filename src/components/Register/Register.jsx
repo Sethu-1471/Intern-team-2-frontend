@@ -118,7 +118,6 @@ function Register() {
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
                           <i className="fa fa-phone text-primary-color"></i>
-                         
                         </span>
                       </div>
                       <input
@@ -155,7 +154,6 @@ function Register() {
                       <div className="input-group-prepend bg-transparent">
                         <span className="input-group-text bg-transparent border-right-0">
                           <i className="fa fa-birthday-cake text-primary-color"></i>
-                       
                         </span>
                       </div>
                       <input
@@ -267,7 +265,12 @@ function Register() {
                   </div>
                   <div className="text-center mt-4 font-weight-light">
                     Already have an account?{" "}
-                    <a onClick={()=>{history.push("/login")}} className="text-primary-color">
+                    <a
+                      onClick={() => {
+                        history.push("/login");
+                      }}
+                      className="text-primary-color"
+                    >
                       Login
                     </a>
                   </div>

@@ -11,7 +11,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Movie, Description, Assignment } from "@material-ui/icons";
 import { useHistory, useParams } from "react-router-dom";
-import { getVideo, submitAssignment,updateAssignment } from "../../../api";
+import { getVideo, submitAssignment, updateAssignment } from "../../../api";
 import { toast } from "react-toastify";
 import AssignmentSubmission from "./AssignmentSubmission";
 
@@ -121,8 +121,8 @@ export default function CustomizedAccordions(props) {
     setDocumentDialog(false);
     setSubmittedAssignment();
     setAssignment({
-      name: ''
-    })
+      name: "",
+    });
   };
 
   const handleSubmitAssignment = (file) => {
@@ -141,7 +141,6 @@ export default function CustomizedAccordions(props) {
     });
   };
 
-
   const handleUpdateAssignment = (file) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -149,9 +148,9 @@ export default function CustomizedAccordions(props) {
     formData.append("assignment_id", submittedAssignment._id);
     let param = {
       course_id: id,
-      assignment_id: submittedAssignment._id
-    }
-    
+      assignment_id: submittedAssignment._id,
+    };
+
     updateAssignment(formData, param).then((res) => {
       if (res.data.status) {
         toast(res.data.message);
@@ -161,7 +160,6 @@ export default function CustomizedAccordions(props) {
       }
     });
   };
-
 
   return (
     <div>

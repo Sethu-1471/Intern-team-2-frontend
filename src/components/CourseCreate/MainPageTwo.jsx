@@ -149,16 +149,23 @@ export default function MainPageTwo() {
             variant="contained"
             color="primary"
             onClick={() => history.push("/editcourse/" + id)}
-            style={{ margin: "0 20px" }}
           >
             Edit Course Details
           </Button>
-          <Button
+          {/* <Button
             variant="contained"
             color="primary"
             onClick={() => setDialogShow(true)}
+            style={{ margin: "10px 20px" }}
           >
             Overview
+          </Button> */}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => history.push("/assignment/" + id)}
+          >
+            Assignment Review
           </Button>
         </div>
         <div>

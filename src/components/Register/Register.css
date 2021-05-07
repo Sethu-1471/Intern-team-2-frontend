@@ -2,7 +2,6 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  
 }
 
 /* logo images style */
@@ -240,17 +239,14 @@ label {
 }
 /* fornt awesome */
 
-.text-primary-color  {
+.text-primary-color {
   color: #392c70 !important;
 }
-a{
-
-    color: #392c70 !important;
-    cursor: pointer;
-    font-weight: 400;
-  
+a {
+  color: #392c70 !important;
+  cursor: pointer;
+  font-weight: 400;
 }
-
 
 .far {
   font-family: Font awesome\5 Free;
@@ -301,7 +297,7 @@ select {
   background: url(../../Assets/register-bg.jpg);
   background-size: cover;
 }
-.btn-primary-color{
+.btn-primary-color {
   background-color: #392c70 !important;
   border-color: #392c70 !important;
   color: #ffffff !important;
